@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz Cursuri CC</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f4f4f9;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 500px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 30px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    .quiz-section {
+      display: none;
+    }
+
+    .quiz-section.active {
+      display: block;
+    }
+
+    .question {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .answer {
+      display: flex;
+      align-items: center;
+      margin: 12px 0;
+    }
+
+    .answer input {
+      margin-right: 15px;
+    }
+
+    .answer span {
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .feedback {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .next-btn {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      background-color: #4caf50;
+      color: white;
+      border-radius: 4px;
+    }
+
+    .select-course {
+      margin-bottom: 20px;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 18px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 12px 30px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .question-info {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="select-course" id="courseSelection">
+      <label for="courseSelect">Alegeți un curs:</label>
+      <select id="courseSelect">
+        <option value="CC-04.json">Cloud Computing 04</option>
+      </select>
+      <div>
+        <input type="checkbox" id="randomToggle" checked />
+        <label for="randomToggle">Întrebări în ordine aleatorie</label>
+      </div>
+      <div>
+        <input type="checkbox" id="answerRandomToggle" checked />
+        <label for="answerRandomToggle">Răspunsuri în ordine aleatorie</label>
+      </div>
+      <button onclick="loadQuiz()">Încarcă întrebările</button>
+    </div>
+    <div id="quiz-container"></div>
+  </div>
+
+  <script>
+    const CC04 = [
+      {
+        "question": "Ce este Kubernetes?",
+        "answers": [
+          {
+            "text": "Un orchestrator de containere pentru crearea, scalarea și managementul aplicațiilor",
+            "correct": true
+          },
+          {
+            "text": "Un limbaj de programare pentru dezvoltarea aplicațiilor web",
+            "correct": false
+          },
+          {
+            "text": "Un sistem de operare special pentru containere",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cine este responsabil pentru izolarea și securitatea aplicațiilor în Kubernetes?",
+        "answers": [
+          {
+            "text": "Developerul sau sysadminul care gestionează clusterul",
+            "correct": true
+          },
+          {
+            "text": "Kubernetes aplică automat toate măsurile de securitate necesare",
+            "correct": false
+          },
+          {
+            "text": "Furnizorul de cloud",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum sunt resursele accesibile în mod implicit într-un cluster Kubernetes?",
+        "answers": [
+          {
+            "text": "Majoritatea resurselor sunt accesibile între ele fără restricții stricte",
+            "correct": true
+          },
+          {
+            "text": "Fiecare pod este complet izolat de celelalte",
+            "correct": false
+          },
+          {
+            "text": "Accesul între resurse este blocat până la configurarea unui firewall",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce rol au cgroups în Kubernetes?",
+        "answers": [
+          {
+            "text": "Controlează utilizarea resurselor precum CPU, memorie și I/O la nivel de container",
+            "correct": true
+          },
+          {
+            "text": "Oferă acces la dashboard-ul Kubernetes",
+            "correct": false
+          },
+          {
+            "text": "Asigură criptarea traficului de rețea",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "La ce se folosesc namespaces în Kubernetes?",
+        "answers": [
+          {
+            "text": "Pentru izolarea proceselor și a sistemelor de fișiere",
+            "correct": true
+          },
+          {
+            "text": "Pentru distribuirea uniformă a podurilor între noduri",
+            "correct": false
+          },
+          {
+            "text": "Pentru stocarea persistentă a datelor",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Care este scopul rețelelor de tip network policies în Kubernetes?",
+        "answers": [
+          {
+            "text": "Filtrarea traficului de rețea între poduri",
+            "correct": true
+          },
+          {
+            "text": "Monitorizarea resurselor consumate de containere",
+            "correct": false
+          },
+          {
+            "text": "Crearea de roluri pentru utilizatori",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce funcționalitate oferă RBAC în Kubernetes?",
+        "answers": [
+          {
+            "text": "Controlul accesului la resursele din cluster bazat pe roluri",
+            "correct": true
+          },
+          {
+            "text": "Alocarea dinamică a resurselor hardware",
+            "correct": false
+          },
+          {
+            "text": "Configurarea politicilor de rețea",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Care este scopul principal al cgroups în Kubernetes?",
+        "answers": [
+          {
+            "text": "Limitarea resurselor precum CPU, memorie și I/O la nivel de container",
+            "correct": true
+          },
+          {
+            "text": "Criptarea datelor stocate în containere",
+            "correct": false
+          },
+          {
+            "text": "Configurarea accesului utilizatorilor în cluster",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "De ce este importantă limitarea resurselor cu cgroups în Kubernetes?",
+        "answers": [
+          {
+            "text": "Pentru a preveni ca un container să afecteze stabilitatea clusterului consumând toate resursele",
+            "correct": true
+          },
+          {
+            "text": "Pentru a crește viteza de rețea între poduri",
+            "correct": false
+          },
+          {
+            "text": "Pentru a permite containerelor să ruleze în paralel pe mai multe noduri",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum este implementat cgroups în Kubernetes?",
+        "answers": [
+          {
+            "text": "La nivel de kernel Linux și expus prin runtime-ul de containere",
+            "correct": true
+          },
+          {
+            "text": "Ca o aplicație externă ce rulează în fiecare container",
+            "correct": false
+          },
+          {
+            "text": "Prin intermediul unui serviciu de rețea dedicat",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce înseamnă 'resources.requests' într-un manifest Kubernetes?",
+        "answers": [
+          {
+            "text": "Resursele minime garantate de Kubernetes pentru rularea podului",
+            "correct": true
+          },
+          {
+            "text": "Resursele maxime pe care le poate folosi containerul",
+            "correct": false
+          },
+          {
+            "text": "Timpul maxim de execuție al containerului",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce definește 'resources.limits' în Kubernetes?",
+        "answers": [
+          {
+            "text": "Resursele maxime pe care podul le poate folosi",
+            "correct": true
+          },
+          {
+            "text": "Numărul minim de replici pentru un deployment",
+            "correct": false
+          },
+          {
+            "text": "Intervalul de timp în care podul trebuie să pornească",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cu ce comandă putem vizualiza requests și limits ale unui pod în Kubernetes?",
+        "answers": [
+          {
+            "text": "kubectl get pod webserver -o json | jq '.spec.containers[].resources'",
+            "correct": true
+          },
+          {
+            "text": "kubectl describe pod webserver --resources",
+            "correct": false
+          },
+          {
+            "text": "kubectl show resources webserver",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "La ce folosește comanda 'crictl inspect <container-id>'?",
+        "answers": [
+          {
+            "text": "Pentru a inspecta detalii despre resursele alocate unui container în cgroups",
+            "correct": true
+          },
+          {
+            "text": "Pentru a porni un nou container în cluster",
+            "correct": false
+          },
+          {
+            "text": "Pentru a crea un pod nou pe control-plane",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce reprezintă valoarea 'quota' din rezultatul comenzii 'crictl inspect'?",
+        "answers": [
+          {
+            "text": "Timpul maxim de CPU permis pentru container într-o perioadă definită",
+            "correct": true
+          },
+          {
+            "text": "Numărul total de poduri din cluster",
+            "correct": false
+          },
+          {
+            "text": "Timpul total de rulare al containerului în milisecunde",
+            "correct": false
+          }
+        ]
+      }, {
+        "question": "Care este rolul principal al namespaces în Kubernetes?",
+        "answers": [
+          {
+            "text": "Separarea logică între obiectele din cadrul unui cluster",
+            "correct": true
+          },
+          {
+            "text": "Crearea automată a podurilor și serviciilor",
+            "correct": false
+          },
+          {
+            "text": "Monitorizarea resurselor la nivel de container",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum ajută namespaces la organizarea mediilor de lucru?",
+        "answers": [
+          {
+            "text": "Prin izolarea resurselor între medii precum development, staging și production",
+            "correct": true
+          },
+          {
+            "text": "Prin automatizarea testării aplicațiilor",
+            "correct": false
+          },
+          {
+            "text": "Prin creșterea performanței podurilor",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce resurse pot fi izolate folosind namespaces în Kubernetes?",
+        "answers": [
+          {
+            "text": "Pods, services, deployments, config maps",
+            "correct": true
+          },
+          {
+            "text": "Volume mount points și kernel modules",
+            "correct": false
+          },
+          {
+            "text": "Fișiere locale din nodurile fizice",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum poate fi utilizat namespaces în contextul multi-tenancy?",
+        "answers": [
+          {
+            "text": "Pentru a izola resursele între echipe sau clienți care folosesc același cluster",
+            "correct": true
+          },
+          {
+            "text": "Pentru a crește limita de memorie alocată containerelor",
+            "correct": false
+          },
+          {
+            "text": "Pentru a conecta containerele din namespace-uri diferite automat",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum pot fi izolate componentele unei aplicații folosind namespaces?",
+        "answers": [
+          {
+            "text": "Fiecare componentă, precum frontend, backend și database, poate avea propriul namespace",
+            "correct": true
+          },
+          {
+            "text": "Fiecare componentă trebuie să ruleze în același namespace pentru compatibilitate",
+            "correct": false
+          },
+          {
+            "text": "Namespaces se folosesc doar pentru izolare între medii, nu între componente",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum putem crea o resursă într-un anumit namespace în Kubernetes?",
+        "answers": [
+          {
+            "text": "Menționând namespace-ul în manifest sau folosind flag-ul -n în comanda kubectl",
+            "correct": true
+          },
+          {
+            "text": "Doar folosind comanda docker-compose",
+            "correct": false
+          },
+          {
+            "text": "Menționând numele podului în fișierul de configurare",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Care este comanda pentru a vizualiza toate namespace-urile dintr-un cluster Kubernetes?",
+        "answers": [
+          {
+            "text": "kubectl get namespaces",
+            "correct": true
+          },
+          {
+            "text": "kubectl show ns",
+            "correct": false
+          },
+          {
+            "text": "kubectl list namespaces",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce permite comanda 'kubectl config set-context --current --namespace=<namespace-name>'?",
+        "answers": [
+          {
+            "text": "Setarea namespace-ului curent pentru comenzile kubectl",
+            "correct": true
+          },
+          {
+            "text": "Crearea unui nou namespace",
+            "correct": false
+          },
+          {
+            "text": "Ștergerea contextului actual",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Este permisă în mod implicit comunicarea între poduri din namespace-uri diferite?",
+        "answers": [
+          {
+            "text": "Da, Kubernetes permite comunicarea între poduri din namespace-uri diferite",
+            "correct": true
+          },
+          {
+            "text": "Nu, namespace-urile blochează complet comunicarea între poduri",
+            "correct": false
+          },
+          {
+            "text": "Doar dacă podurile au același nume",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum poate fi limitat accesul între poduri aflate în namespace-uri diferite?",
+        "answers": [
+          {
+            "text": "Prin utilizarea de network policies",
+            "correct": true
+          },
+          {
+            "text": "Prin redenumirea namespace-urilor",
+            "correct": false
+          },
+          {
+            "text": "Prin crearea de volume dedicate",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Care este scopul principal al NetworkPolicies în Kubernetes?",
+        "answers": [
+          { "text": "Izolarea traficului de rețea între poduri și namespace-uri", "correct": true },
+          { "text": "Actualizarea automată a containerelor", "correct": false },
+          { "text": "Monitorizarea resurselor unui pod", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce se întâmplă dacă nu există niciun NetworkPolicy aplicat într-un cluster Kubernetes?",
+        "answers": [
+          { "text": "Tot traficul este permis", "correct": true },
+          { "text": "Tot traficul este blocat", "correct": false },
+          { "text": "Doar traficul egress este permis", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce element definește ce poduri sunt afectate de o NetworkPolicy?",
+        "answers": [
+          { "text": "podSelector", "correct": true },
+          { "text": "policyTypes", "correct": false },
+          { "text": "metadata.name", "correct": false }
+        ]
+      },
+      {
+        "question": "Care sunt cele două tipuri principale de trafic reglementate de NetworkPolicies?",
+        "answers": [
+          { "text": "Ingress și Egress", "correct": true },
+          { "text": "Inbound și Outbound", "correct": false },
+          { "text": "TCP și UDP", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce înseamnă un selector gol în podSelector (adica `{}`)?",
+        "answers": [
+          { "text": "Se aplică tuturor podurilor din namespace", "correct": true },
+          { "text": "Nu se aplică niciunui pod", "correct": false },
+          { "text": "Se aplică doar podurilor default", "correct": false }
+        ]
+      },
+      {
+        "question": "Dacă într-o NetworkPolicy nu este specificată secțiunea ingress, ce se întâmplă?",
+        "answers": [
+          { "text": "Tot traficul de intrare este blocat", "correct": true },
+          { "text": "Tot traficul este permis", "correct": false },
+          { "text": "Se aplică doar regulile de egress", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce rol are `policyTypes` în definirea unei NetworkPolicy?",
+        "answers": [
+          { "text": "Definește tipul de trafic afectat: Ingress și/sau Egress", "correct": true },
+          { "text": "Alege namespace-ul vizat", "correct": false },
+          { "text": "Specifică porturile TCP/UDP", "correct": false }
+        ]
+      },
+      {
+        "question": "NetworkPolicies sunt aditive. Ce înseamnă acest lucru?",
+        "answers": [
+          { "text": "Toate regulile se combină și traficul este permis dacă cel puțin una permite", "correct": true },
+          { "text": "Se aplică doar prima politică definită", "correct": false },
+          { "text": "Se aplică regula care restricționează cel mai mult traficul", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum putem restricționa traficul între namespace-uri diferite?",
+        "answers": [
+          { "text": "Folosind namespaceSelector într-o NetworkPolicy", "correct": true },
+          { "text": "Folosind config maps", "correct": false },
+          { "text": "Prin modificarea fișierului kube-dns", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce reprezintă `from` în secțiunea ingress a unei NetworkPolicy?",
+        "answers": [
+          { "text": "Sursele permise pentru traficul de intrare", "correct": true },
+          { "text": "Destinațiile permise pentru traficul de ieșire", "correct": false },
+          { "text": "Selectorul podurilor afectate", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce se întâmplă dacă într-o NetworkPolicy lipsesc complet regulile de ingress și egress?",
+        "answers": [
+          { "text": "Tot traficul este blocat", "correct": true },
+          { "text": "Tot traficul este permis", "correct": false },
+          { "text": "Se blochează doar traficul de ieșire", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum poate fi permis tot traficul de intrare într-un namespace folosind o NetworkPolicy?",
+        "answers": [
+          { "text": "Adăugând `ingress: - {}` în NetworkPolicy", "correct": true },
+          { "text": "Folosind `policyTypes: - All`", "correct": false },
+          { "text": "Omitând complet `ingress`", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce indică `cluster.local` într-un URL intern Kubernetes?",
+        "answers": [
+          { "text": "Este sufixul DNS standard pentru resursele din cluster", "correct": true },
+          { "text": "Este un pod din namespace-ul default", "correct": false },
+          { "text": "Este un serviciu extern", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este scopul portului specificat în NetworkPolicy?",
+        "answers": [
+          { "text": "Permite doar traficul pe acel port", "correct": true },
+          { "text": "Blochează tot traficul pe acel port", "correct": false },
+          { "text": "Este ignorat dacă selectorul este gol", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce componentă DNS rezolvă adresele podurilor în Kubernetes?",
+        "answers": [
+          { "text": "kube-dns", "correct": true },
+          { "text": "kube-proxy", "correct": false },
+          { "text": "kubectl", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum putem testa conectivitatea între poduri după aplicarea unei NetworkPolicy?",
+        "answers": [
+          { "text": "Folosind comanda curl între poduri", "correct": true },
+          { "text": "Prin restartarea clusterului", "correct": false },
+          { "text": "Prin kubectl logs", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce înseamnă traficul 'East-West' în Kubernetes?",
+        "answers": [
+          { "text": "Trafic între poduri din același cluster", "correct": true },
+          { "text": "Trafic între utilizatori și cluster", "correct": false },
+          { "text": "Trafic între noduri externe", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce înseamnă traficul 'North-South' în Kubernetes?",
+        "answers": [
+          { "text": "Trafic între cluster și exterior (internet, utilizatori)", "correct": true },
+          { "text": "Trafic între poduri", "correct": false },
+          { "text": "Trafic intern între noduri", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce efect are lipsa câmpului `egress` într-o NetworkPolicy care specifică doar `policyTypes: [Egress]`?",
+        "answers": [
+          { "text": "Toate conexiunile de ieșire sunt blocate", "correct": true },
+          { "text": "Toate conexiunile de ieșire sunt permise", "correct": false },
+          { "text": "Nu are niciun efect", "correct": false }
+        ]
+      },
+      {
+        "question": "Poate o NetworkPolicy să blocheze explicit un anumit tip de trafic?",
+        "answers": [
+          { "text": "Nu, traficul este blocat doar în lipsa unei reguli care îl permite", "correct": true },
+          { "text": "Da, dacă se folosește un câmp de tip `deny`", "correct": false },
+          { "text": "Da, dacă se folosește `policyTypes: Deny`", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este RBAC în Kubernetes?",
+        "answers": [
+          { "text": "Un mecanism de control al accesului", "correct": true },
+          { "text": "Un sistem de logare a erorilor", "correct": false },
+          { "text": "Un instrument de monitorizare", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce rol are RBAC într-un mediu zero-trust?",
+        "answers": [
+          { "text": "Permite accesul complet tuturor utilizatorilor", "correct": false },
+          { "text": "Permite accesul doar la resursele necesare", "correct": true },
+          { "text": "Blochează complet accesul la resurse", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce resursă definește ce acțiuni pot fi efectuate asupra resurselor Kubernetes?",
+        "answers": [
+          { "text": "Role sau ClusterRole", "correct": true },
+          { "text": "ServiceAccount", "correct": false },
+          { "text": "Pod", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce resursă leagă un rol de un utilizator sau service account?",
+        "answers": [
+          { "text": "RoleBinding sau ClusterRoleBinding", "correct": true },
+          { "text": "Pod", "correct": false },
+          { "text": "Deployment", "correct": false }
+        ]
+      },
+      {
+        "question": "Unde se aplică o resursă de tip Role?",
+        "answers": [
+          { "text": "Într-un singur namespace", "correct": true },
+          { "text": "În toate namespace-urile", "correct": false },
+          { "text": "Doar în namespace-ul default", "correct": false }
+        ]
+      },
+      {
+        "question": "Unde se aplică o resursă de tip ClusterRole?",
+        "answers": [
+          { "text": "La nivel de cluster", "correct": true },
+          { "text": "Doar în namespace-ul default", "correct": false },
+          { "text": "Într-un pod", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce face un RoleBinding?",
+        "answers": [
+          { "text": "Leagă un rol de un utilizator într-un namespace", "correct": true },
+          { "text": "Crează un pod nou", "correct": false },
+          { "text": "Monitorizează resursele", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce face un ClusterRoleBinding?",
+        "answers": [
+          { "text": "Leagă un ClusterRole de un utilizator la nivel de cluster", "correct": true },
+          { "text": "Crează un nou namespace", "correct": false },
+          { "text": "Conectează două poduri", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este rolul unui ServiceAccount în Kubernetes?",
+        "answers": [
+          { "text": "Definește identitatea aplicațiilor care rulează în cluster", "correct": true },
+          { "text": "Conectează utilizatorii între ei", "correct": false },
+          { "text": "Stochează imagini Docker", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este montat automat în container pentru autentificare?",
+        "answers": [
+          { "text": "Un token JWT", "correct": true },
+          { "text": "O cheie SSH", "correct": false },
+          { "text": "Un fișier de configurare YAML", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce comenzi folosim pentru a crea service accounts?",
+        "answers": [
+          { "text": "kubectl create serviceaccount", "correct": true },
+          { "text": "kubectl apply sa", "correct": false },
+          { "text": "kubectl init sa", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum generăm un token pentru un service account?",
+        "answers": [
+          { "text": "kubectl -n <namespace> create token <serviceaccount>", "correct": true },
+          { "text": "kubectl get secrets", "correct": false },
+          { "text": "kubectl auth token", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce definește secțiunea 'rules' într-un Role?",
+        "answers": [
+          { "text": "Ce resurse pot fi accesate și ce acțiuni pot fi făcute", "correct": true },
+          { "text": "Ce utilizatori pot accesa Kubernetes", "correct": false },
+          { "text": "Ce poduri rulează în namespace", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce face comanda curl cu headerul Authorization: Bearer $DEV_TOKEN?",
+        "answers": [
+          { "text": "Trimite un request autentificat la API-ul Kubernetes", "correct": true },
+          { "text": "Creează un nou token", "correct": false },
+          { "text": "Listă utilizatorii din cluster", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce fel de acțiuni poate executa utilizatorul 'alice' în exemplul oferit?",
+        "answers": [
+          { "text": "list și get pe pods și services", "correct": true },
+          { "text": "delete pe deployments", "correct": false },
+          { "text": "create pe pods", "correct": false }
+        ]
+      }
+    ]
+
+    let quizzes = [];
+    let correctAnswersCount = 0; // Track the number of correct answers
+
+    async function loadQuiz() {
+      const select = document.getElementById('courseSelect').value;
+
+      if (select === 'CC-04.json') {
+        quizzes = CC04;
+      }
+
+      // Check if random order for questions is selected
+      const randomOrder = document.getElementById('randomToggle').checked;
+
+      if (randomOrder) {
+        quizzes.sort(() => 0.5 - Math.random());
+      }
+
+      const quizContainer = document.getElementById('quiz-container');
+      quizContainer.innerHTML = '';
+
+      // Hide course selection after loading
+      document.getElementById('courseSelection').style.display = 'none';
+
+      quizzes.forEach((quiz, index) => {
+        const quizSection = document.createElement('div');
+        quizSection.id = `quiz-${index + 1}`;
+        quizSection.classList.add('quiz-section');
+        if (index === 0) quizSection.classList.add('active');
+
+        // Check if random order for answers is selected
+        const answerRandomOrder = document.getElementById('answerRandomToggle').checked;
+
+        const answers = answerRandomOrder ? quiz.answers.sort(() => 0.5 - Math.random()) : quiz.answers;
+
+        quizSection.innerHTML = `
+          <div class="question-info">Întrebarea ${index + 1} din ${quizzes.length}</div>
+          <div class="question">${quiz.question}</div>
+          ${answers.map((answer, i) => `
+            <div class="answer">
+              <input type="radio" name="q${index + 1}" id="q${index + 1}-answer${i}" value="${answer.correct ? 1 : 0}" /> 
+              <span onclick="document.getElementById('q${index + 1}-answer${i}').click();">${answer.text}</span>
+            </div>`).join('')}
+          <div id="feedback-${index + 1}" class="feedback"></div>
+          <div id="correct-answer-${index + 1}" class="feedback" style="color: blue;"></div>
+          <button class="next-btn" onclick="checkAnswer(${index + 1}, 1)">Submit</button>
+        `;
+
+        quizContainer.appendChild(quizSection);
+      });
+    }
+
+    function checkAnswer(quizNumber, correctAnswer) {
+      const selectedOption = document.querySelector(`input[name="q${quizNumber}"]:checked`);
+      const feedback = document.getElementById(`feedback-${quizNumber}`);
+      const correctAnswerDisplay = document.getElementById(`correct-answer-${quizNumber}`);
+      const quiz = quizzes[quizNumber - 1];
+
+      if (selectedOption) {
+        if (parseInt(selectedOption.value) === correctAnswer) {
+          feedback.textContent = "Răspuns corect!";
+          feedback.style.color = "green";
+          correctAnswersCount++; // Increment correct answers count
+        } else {
+          feedback.textContent = "Răspuns greșit!";
+          feedback.style.color = "red";
+          correctAnswerDisplay.textContent = `Răspunsul corect este: ${quiz.answers.find(a => a.correct).text}`;
+        }
+
+        const nextButton = document.querySelector(`#quiz-${quizNumber} .next-btn`);
+        nextButton.textContent = "Următoarea Întrebare";
+        nextButton.onclick = function () {
+          goToNextQuestion(quizNumber + 1);
+        };
+      } else {
+        feedback.textContent = "Selectați un răspuns!";
+        feedback.style.color = "orange";
+      }
+    }
+
+    function goToNextQuestion(nextQuizNumber) {
+      document.querySelector(`#quiz-${nextQuizNumber - 1}`).classList.remove("active");
+      const nextQuiz = document.getElementById(`quiz-${nextQuizNumber}`);
+      if (nextQuiz) {
+        nextQuiz.classList.add("active");
+        document.getElementById(`feedback-${nextQuizNumber - 1}`).textContent = '';
+        document.getElementById(`correct-answer-${nextQuizNumber - 1}`).textContent = '';
+      } else {
+        // Quiz completed, show results
+        alert(`Quiz complet! Felicitări! Ați răspuns corect la ${correctAnswersCount} din ${quizzes.length} întrebări.`);
+      }
+    }
+  </script>
+</body>
+
+</html>
