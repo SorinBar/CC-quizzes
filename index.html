@@ -108,6 +108,7 @@
         <option value="CC-04">Cloud Computing 04</option>
         <option value="CC-05">Cloud Computing 05</option>
         <option value="CC-07">Cloud Computing 07</option>
+        <option value="CC-08">Cloud Computing 08</option>
       </select>
       <div>
         <input type="checkbox" id="randomToggle" checked />
@@ -2609,6 +2610,369 @@
       }
     ]
 
+    const CC08 = [
+      {
+        "question": "Ce reprezintă datele într-un context de data pipelines?",
+        "answers": [
+          { "text": "Evenimente precum tranzacții, logări sau loguri de securitate", "correct": true },
+          { "text": "Fișiere statice cu informații arhivate", "correct": false },
+          { "text": "Documentația aplicației", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce poate fi considerat un exemplu de eveniment într-un data pipeline?",
+        "answers": [
+          { "text": "O tranzacție online sau un log de securitate", "correct": true },
+          { "text": "Un fișier PDF descărcat de pe internet", "correct": false },
+          { "text": "Un cod sursă scris într-un IDE", "correct": false }
+        ]
+      },
+      {
+        "question": "Care dintre următoarele reprezintă un use case pentru data pipelines?",
+        "answers": [
+          { "text": "Managementul securității", "correct": true },
+          { "text": "Crearea interfeței grafice", "correct": false },
+          { "text": "Redactarea documentației", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce alt use case este menționat pentru data pipelines?",
+        "answers": [
+          { "text": "Gestiunea tranzacțiilor în e-commerce", "correct": true },
+          { "text": "Configurarea setărilor aplicației", "correct": false },
+          { "text": "Criptarea parolelor", "correct": false }
+        ]
+      },
+      {
+        "question": "Pe ce componentă a procesării datelor se concentrează cursul?",
+        "answers": [
+          { "text": "Agregarea informației", "correct": true },
+          { "text": "Stilizarea interfeței", "correct": false },
+          { "text": "Testarea automată", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce caracterizează o arhitectură bazată pe micro-servicii?",
+        "answers": [
+          { "text": "Aplicația este împărțită în servicii independente", "correct": true },
+          { "text": "Codul este scris într-un singur fișier principal", "correct": false },
+          { "text": "Toate componentele rulează pe același server", "correct": false }
+        ]
+      },
+      {
+        "question": "Un avantaj al microserviciilor este:",
+        "answers": [
+          { "text": "Posibilitatea de a actualiza o componentă fără a afecta celelalte", "correct": true },
+          { "text": "Reducerea nevoii de testare", "correct": false },
+          { "text": "Eliminarea completă a bugurilor", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum pot comunica microserviciile între ele?",
+        "answers": [
+          { "text": "Prin endpointuri, cum ar fi un API RESTful", "correct": true },
+          { "text": "Prin fișiere text partajate", "correct": false },
+          { "text": "Prin conexiuni directe la bazele de date", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este o problemă a comunicării prin API RESTful între microservicii?",
+        "answers": [
+          { "text": "Crește gradul de cuplare între servicii", "correct": true },
+          { "text": "Consumă mai puțină memorie", "correct": false },
+          { "text": "Este mai sigură decât alte metode", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce problemă apare dacă vrem să colectăm analitici despre evenimente într-un sistem clasic?",
+        "answers": [
+          { "text": "Trebuie să adăugăm manual apeluri către sistemul de analitici", "correct": true },
+          { "text": "Se pierd toate datele de tranzacție", "correct": false },
+          { "text": "Nu putem trimite date între servicii", "correct": false }
+        ]
+      },
+      {
+        "question": "De ce nu este scalabil modul naiv de integrare între microservicii?",
+        "answers": [
+          { "text": "Crește complexitatea și code base-ul", "correct": true },
+          { "text": "Funcționează doar pe Linux", "correct": false },
+          { "text": "Consumă prea multă memorie RAM", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce soluție este sugerată pentru a permite procesarea scalabilă a evenimentelor?",
+        "answers": [
+          { "text": "Transformarea sistemului într-un sistem de logging la care alte servicii se pot abona", "correct": true },
+          { "text": "Crearea unei aplicații monolitice", "correct": false },
+          { "text": "Refactorizarea tuturor componentelor simultan", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este scopul principal al logării evenimentelor?",
+        "answers": [
+          { "text": "Sprijinirea deciziilor de business sau billing", "correct": true },
+          { "text": "Îmbunătățirea designului interfeței", "correct": false },
+          { "text": "Reducerea consumului de memorie", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce tip de structură poate reprezenta logarea evenimentelor în cloud computing?",
+        "answers": [
+          { "text": "O bază de date append-only", "correct": true },
+          { "text": "Un fișier XML distribuit", "correct": false },
+          { "text": "O rețea peer-to-peer", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este o problemă a bazelor de date tradiționale în contextul procesării de evenimente?",
+        "answers": [
+          { "text": "Nu scalează bine pe mai multe noduri", "correct": true },
+          { "text": "Nu pot stoca date text", "correct": false },
+          { "text": "Necesită hardware dedicat", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce înseamnă scalare verticală la bazele de date?",
+        "answers": [
+          { "text": "Creșterea performanței unui singur nod", "correct": true },
+          { "text": "Adăugarea de noduri suplimentare", "correct": false },
+          { "text": "Replicarea automată a datelor", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este o alternativă la bazele de date pentru procesarea evenimentelor?",
+        "answers": [
+          { "text": "Sisteme de message passing (message queues)", "correct": true },
+          { "text": "Procesoare de imagini", "correct": false },
+          { "text": "Servicii DNS", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce rol au sistemele de tip message passing în arhitecturi distribuite precum OpenStack?",
+        "answers": [
+          { "text": "Facilitează comunicarea între componente prin evenimente", "correct": true },
+          { "text": "Înlocuiesc bazele de date relaționale", "correct": false },
+          { "text": "Găzduiesc interfețele grafice", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este o limitare importantă a sistemelor de tip message queue?",
+        "answers": [
+          { "text": "Evenimentele dispar după ce sunt consumate", "correct": true },
+          { "text": "Nu pot trimite date între noduri", "correct": false },
+          { "text": "Necesită conexiune constantă la internet", "correct": false }
+        ]
+      },
+      {
+        "question": "De ce nu este suficient un message queue dacă avem mai mulți consumatori?",
+        "answers": [
+          { "text": "Evenimentul este eliminat după primul consum", "correct": true },
+          { "text": "Se dublează automat toate mesajele", "correct": false },
+          { "text": "Este incompatibil cu REST APIs", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce dezavantaj au MQ-urile în contextul istoricelor de evenimente?",
+        "answers": [
+          { "text": "Nu stochează un istoric al mesajelor", "correct": true },
+          { "text": "Necesită autentificare biometrică", "correct": false },
+          { "text": "Generează erori în rețele WiFi", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce rol are un broker în arhitectura Apache Kafka?",
+        "answers": [
+          { "text": "Controlează și gestionează cozile de mesaje (topicuri)", "correct": true },
+          { "text": "Inserează mesaje în cozi", "correct": false },
+          { "text": "Consumă mesaje din cozi", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce funcție are un producer în Kafka?",
+        "answers": [
+          { "text": "Aplică algoritmi de hashing pe mesaje", "correct": false },
+          { "text": "Aplică politici de retenție a mesajelor", "correct": false },
+          { "text": "Aplicăția care inserează mesaje în cozi (topicuri)", "correct": true }
+        ]
+      },
+      {
+        "question": "Ce face un consumer în Kafka?",
+        "answers": [
+          { "text": "Accesează și procesează mesaje din cozi (topicuri)", "correct": true },
+          { "text": "Trimite mesaje către brokeri", "correct": false },
+          { "text": "Monitorizează starea clusterei", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce soluție este necesară pentru a putea interoga evenimentele pe termen lung?",
+        "answers": [
+          { "text": "Agregarea evenimentelor într-un mediu de stocare permanent", "correct": true },
+          { "text": "Folosirea directă a API-urilor REST", "correct": false },
+          { "text": "Înlocuirea MQ-urilor cu baze de date relaționale", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este Apache Kafka și care este scopul său principal?",
+        "answers": [
+          { "text": "Este un sistem care procesează datele direct", "correct": false },
+          { "text": "Este un instrument care facilitează procesarea datelor prin stocarea și transmiterea mesajelor", "correct": true },
+          { "text": "Este un API pentru baze de date relaționale", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce rol joacă file system-ul în Kafka?",
+        "answers": [
+          { "text": "Este folosit doar temporar pentru cache", "correct": false },
+          { "text": "Este locul unde Kafka stochează persistent evenimentele", "correct": true },
+          { "text": "Este folosit pentru a procesa mesajele", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce garanție oferă Kafka pentru stocarea datelor?",
+        "answers": [
+          { "text": "Datele sunt replicate și persistate pe disc", "correct": true },
+          { "text": "Datele sunt stocate doar în memorie", "correct": false },
+          { "text": "Datele sunt criptate dar nu replicate", "correct": false }
+        ]
+      },
+      {
+        "question": "Care sunt cele trei componente principale ale arhitecturii Kafka?",
+        "answers": [
+          { "text": "Topic, Partition, Cluster", "correct": false },
+          { "text": "Broker, Producer, Consumer", "correct": true },
+          { "text": "Client, Server, Database", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este un topic în Kafka?",
+        "answers": [
+          { "text": "Un fișier de configurare pentru mesaje", "correct": false },
+          { "text": "O coadă de evenimente asociată unui anumit tip de date", "correct": true },
+          { "text": "Un script care procesează loguri", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum permite Kafka scalarea orizontală?",
+        "answers": [
+          { "text": "Prin partiționarea topicurilor între brokeri", "correct": true },
+          { "text": "Prin dublarea nodurilor vertical", "correct": false },
+          { "text": "Prin replicarea mesajelor doar pe un singur nod", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este rolul unei partiții în Kafka?",
+        "answers": [
+          { "text": "Să izoleze consumatorii", "correct": false },
+          { "text": "Să împartă un topic pe mai mulți brokeri", "correct": true },
+          { "text": "Să cripteze mesajele", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum sunt distribuite mesajele în partițiile Kafka?",
+        "answers": [
+          { "text": "Aleatoriu", "correct": false },
+          { "text": "Pe baza unei chei sau a unui algoritm de hashing", "correct": true },
+          { "text": "Manual de către administrator", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce avantaj aduce replicarea mesajelor în Kafka?",
+        "answers": [
+          { "text": "Reduce dimensiunea datelor", "correct": false },
+          { "text": "Permite redundanță și disponibilitate în caz de failure", "correct": true },
+          { "text": "Crește viteza de scriere", "correct": false }
+        ]
+      },
+      {
+        "question": "Câți brokeri sunt recomandați într-un cluster Kafka complet?",
+        "answers": [
+          { "text": "1", "correct": false },
+          { "text": "2", "correct": false },
+          { "text": "Minim 3", "correct": true }
+        ]
+      },
+      {
+        "question": "Cum se abonează un consumer la un topic Kafka?",
+        "answers": [
+          { "text": "Folosind API-ul Kafka", "correct": true },
+          { "text": "Editând fișierele de configurare", "correct": false },
+          { "text": "Prin comenzi CLI", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce dezavantaj are conectarea naivă a unui consumer la un topic?",
+        "answers": [
+          { "text": "Consumatorii nu pot primi mesaje", "correct": false },
+          { "text": "Nu se paralelizează procesarea datelor", "correct": true },
+          { "text": "Se pierd mesajele la conectare", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este scopul grupurilor de consumatori în Kafka?",
+        "answers": [
+          { "text": "Să trimită mesaje simultan la producători", "correct": false },
+          { "text": "Să proceseze evenimente fără suprapunere între consumatori", "correct": true },
+          { "text": "Să stocheze logurile local", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce se întâmplă dacă numărul de consumatori dintr-un grup depășește numărul de partiții?",
+        "answers": [
+          { "text": "Toți consumatorii vor primi mesaje simultan", "correct": false },
+          { "text": "Consumatorii în plus nu vor procesa mesaje", "correct": true },
+          { "text": "Se vor crea automat mai multe partiții", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce avantaj oferă folosirea consumatorilor în plus față de numărul de partiții?",
+        "answers": [
+          { "text": "Reduc dimensiunea mesajelor", "correct": false },
+          { "text": "Asigură redundanță în caz de eșec al altor consumatori", "correct": true },
+          { "text": "Accelerează scrierea mesajelor", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum contribuie Kafka la un sistem highly available?",
+        "answers": [
+          { "text": "Prin transmiterea în direct a mesajelor", "correct": false },
+          { "text": "Prin replicarea mesajelor pe mai mulți brokeri", "correct": true },
+          { "text": "Prin eliminarea partițiilor", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este un broker în Kafka?",
+        "answers": [
+          { "text": "Un client de configurare", "correct": false },
+          { "text": "Un nod care gestionează topicuri și mesaje", "correct": true },
+          { "text": "Un sistem de criptare", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce rol are un producer în Kafka?",
+        "answers": [
+          { "text": "Primește mesaje de la consumatori", "correct": false },
+          { "text": "Trimite mesaje în topicuri", "correct": true },
+          { "text": "Administrează replicarea", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce tip de garanție de performanță oferă Kafka pentru inserturi?",
+        "answers": [
+          { "text": "Inserări la intervale de câteva secunde", "correct": false },
+          { "text": "Inserări la nivel de sub o secundă", "correct": true },
+          { "text": "Inserări asincrone garantate după 1 minut", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum evită Kafka fenomenul de hostspotting?",
+        "answers": [
+          { "text": "Prin reducerea dimensiunii mesajelor", "correct": false },
+          { "text": "Prin distribuirea evenimentelor între mai mulți brokeri", "correct": true },
+          { "text": "Prin trimiterea mesajelor doar noaptea", "correct": false }
+        ]
+      }
+    ];
+
     let quizzes = [];
     let correctAnswersCount = 0; // Track the number of correct answers
 
@@ -2623,6 +2987,9 @@
       }
       if (select === 'CC-07') {
         quizzes = CC07;
+      }
+      if (select === 'CC-08') {
+        quizzes = CC08;
       }
 
       // Check if random order for questions is selected
