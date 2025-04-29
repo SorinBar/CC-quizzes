@@ -105,7 +105,9 @@
     <div class="select-course" id="courseSelection">
       <label for="courseSelect">Alegeți un curs:</label>
       <select id="courseSelect">
-        <option value="CC-04.json">Cloud Computing 04</option>
+        <option value="CC-04">Cloud Computing 04</option>
+        <option value="CC-05">Cloud Computing 05</option>
+        <option value="CC-07">Cloud Computing 07</option>
       </select>
       <div>
         <input type="checkbox" id="randomToggle" checked />
@@ -121,7 +123,1288 @@
   </div>
 
   <script>
+
     const CC04 = [
+      {
+        "question": "Care este scopul principal al Kubernetes?",
+        "answers": [
+          {
+            "text": "Gestionarea automată a aplicațiilor care rulează în containere",
+            "correct": true
+          },
+          {
+            "text": "Crearea de baze de date pentru aplicații",
+            "correct": false
+          },
+          {
+            "text": "Scrierea codului pentru aplicații web",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce permite Kubernetes în gestionarea containerelor?",
+        "answers": [
+          {
+            "text": "Pornirea, conectarea, scalarea și distribuirea containerelor pe mai multe noduri",
+            "correct": true
+          },
+          {
+            "text": "Scrierea codului pentru containere",
+            "correct": false
+          },
+          {
+            "text": "Limitarea numărului de utilizatori pentru fiecare container",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum putem porni un container în Kubernetes?",
+        "answers": [
+          {
+            "text": "Folosind comanda 'kubectl create deployment'",
+            "correct": true
+          },
+          {
+            "text": "Prin scrierea unui script Bash",
+            "correct": false
+          },
+          {
+            "text": "Prin editarea manuală a fișierelor de configurare ale serverului",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Care este dezavantajul pornirii manuale a unui Deployment în Kubernetes?",
+        "answers": [
+          {
+            "text": "Necesită intervenție manuală din partea unui operator",
+            "correct": true
+          },
+          {
+            "text": "Nu permite scalarea automată a containerelor",
+            "correct": false
+          },
+          {
+            "text": "Nu permite conectarea containerelor între ele",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Care este avantajul utilizării fișierelor manifest pentru Deployment-uri în Kubernetes?",
+        "answers": [
+          {
+            "text": "Fișierele sunt repoziționabile și pot fi gestionate cu Git",
+            "correct": true
+          },
+          {
+            "text": "Fișierele manifest permit rularea mai rapidă a containerelor",
+            "correct": false
+          },
+          {
+            "text": "Fișierele manifest elimină complet necesitatea comenzilor Kubernetes",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce tip de fișier este folosit pentru a defini un Deployment în Kubernetes?",
+        "answers": [
+          {
+            "text": "Fișier YAML",
+            "correct": true
+          },
+          {
+            "text": "Fișier JSON",
+            "correct": false
+          },
+          {
+            "text": "Fișier XML",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce secțiune dintr-un fișier manifest definește numărul de replici pentru un Deployment?",
+        "answers": [
+          {
+            "text": "spec.replicas",
+            "correct": true
+          },
+          {
+            "text": "metadata.labels",
+            "correct": false
+          },
+          {
+            "text": "apiVersion",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce informații conține secțiunea 'metadata' într-un fișier manifest pentru un deployment?",
+        "answers": [
+          {
+            "text": "Numele deploymentului și etichetele (label-urile) asociate",
+            "correct": true
+          },
+          {
+            "text": "Configurările de rețea ale deploymentului",
+            "correct": false
+          },
+          {
+            "text": "Lista containerelor din deployment",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "La ce sunt folosite etichetele (label-urile) într-un deployment Kubernetes?",
+        "answers": [
+          {
+            "text": "Pentru a selecta obiectele asociate unei aplicații",
+            "correct": true
+          },
+          {
+            "text": "Pentru a defini numărul de replici ale deploymentului",
+            "correct": false
+          },
+          {
+            "text": "Pentru a seta permisiuni pe poduri",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce comandă creează un obiect nou dintr-un fișier manifest în Kubernetes?",
+        "answers": [
+          {
+            "text": "kubectl create -f",
+            "correct": true
+          },
+          {
+            "text": "kubectl apply -f",
+            "correct": false
+          },
+          {
+            "text": "kubectl start -f",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Care este diferența dintre 'kubectl create -f' și 'kubectl apply -f'?",
+        "answers": [
+          {
+            "text": "'apply' aplică și modificări asupra obiectelor existente, pe când 'create' doar creează obiecte noi",
+            "correct": true
+          },
+          {
+            "text": "'create' aplică modificări asupra obiectelor existente, pe când 'apply' doar creează obiecte noi",
+            "correct": false
+          },
+          {
+            "text": "Nu există nicio diferență între cele două comenzi",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum putem afla IP-ul unui pod în Kubernetes?",
+        "answers": [
+          {
+            "text": "Folosind comanda 'kubectl describe pods -l app=nextcloud | grep IP'",
+            "correct": true
+          },
+          {
+            "text": "Folosind comanda 'kubectl get pods --show-ip'",
+            "correct": false
+          },
+          {
+            "text": "Folosind comanda 'kubectl show-ip pod nextcloud'",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum putem filtra podurile după eticheta 'app=nextcloud'?",
+        "answers": [
+          {
+            "text": "Folosind opțiunea '-l app=nextcloud' în comenzi",
+            "correct": true
+          },
+          {
+            "text": "Folosind opțiunea '--filter app=nextcloud' în comenzi",
+            "correct": false
+          },
+          {
+            "text": "Editând manual fișierul manifest",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce se întâmplă cu IP-ul unui pod Kubernetes dacă acesta este șters și regenerat?",
+        "answers": [
+          {
+            "text": "IP-ul se modifică",
+            "correct": true
+          },
+          {
+            "text": "IP-ul rămâne același",
+            "correct": false
+          },
+          {
+            "text": "Podul nu mai primește un IP nou",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce comandă putem folosi pentru a șterge un pod cu eticheta 'app=nextcloud'?",
+        "answers": [
+          {
+            "text": "kubectl delete pods -l app=nextcloud",
+            "correct": true
+          },
+          {
+            "text": "kubectl remove pod nextcloud",
+            "correct": false
+          },
+          {
+            "text": "kubectl erase pod nextcloud",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum putem verifica detaliile unui pod folosind comanda 'kubectl describe'?",
+        "answers": [
+          {
+            "text": "Folosind 'kubectl describe pods -l app=nextcloud'",
+            "correct": true
+          },
+          {
+            "text": "Folosind 'kubectl show pods nextcloud'",
+            "correct": false
+          },
+          {
+            "text": "Folosind 'kubectl info pod nextcloud'",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Care este scopul principal al comenzii 'kubectl apply -f'?",
+        "answers": [
+          {
+            "text": "Să creeze obiecte și să aplice modificări asupra obiectelor existente",
+            "correct": true
+          },
+          {
+            "text": "Să creeze doar obiecte noi, fără a modifica obiectele existente",
+            "correct": false
+          },
+          {
+            "text": "Să șteargă și să recreeze obiectele dintr-un fișier manifest",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum se pot conecta podurile între ele într-un cluster Kubernetes fără politici de securitate?",
+        "answers": [
+          {
+            "text": "Folosind IP-ul fiecărui pod",
+            "correct": true
+          },
+          {
+            "text": "Folosind numele podului",
+            "correct": false
+          },
+          {
+            "text": "Folosind un fișier de configurare static",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "De ce identificarea unui pod doar prin IP poate fi problematică?",
+        "answers": [
+          {
+            "text": "Pentru că IP-ul unui pod se schimbă la fiecare restart sau redeploy",
+            "correct": true
+          },
+          {
+            "text": "Pentru că Kubernetes nu alocă IP-uri unice podurilor",
+            "correct": false
+          },
+          {
+            "text": "Pentru că podurile nu pot comunica între ele prin IP-uri",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce se întâmplă cu IP-ul unui pod dacă acesta este oprit și repornit?",
+        "answers": [
+          {
+            "text": "IP-ul se schimbă",
+            "correct": true
+          },
+          {
+            "text": "IP-ul rămâne același",
+            "correct": false
+          },
+          {
+            "text": "Podul nu mai primește un IP",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce rol au obiectele de tip Service în Kubernetes?",
+        "answers": [
+          {
+            "text": "Expun un deployment sau un set de poduri către cluster sau exterior",
+            "correct": true
+          },
+          {
+            "text": "Sunt folosite pentru a stoca date în Kubernetes",
+            "correct": false
+          },
+          {
+            "text": "Se ocupă cu gestionarea resurselor CPU și memorie pentru poduri",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum se creează un serviciu pentru a expune deploymentul nextcloud?",
+        "answers": [
+          {
+            "text": "Folosind comanda 'kubectl expose deployment nextcloud --port 80'",
+            "correct": true
+          },
+          {
+            "text": "Folosind comanda 'kubectl create service nextcloud'",
+            "correct": false
+          },
+          {
+            "text": "Folosind comanda 'kubectl apply -f nextcloud-service.yaml'",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce resursă este asociată unui serviciu Kubernetes după ce este creat?",
+        "answers": [
+          {
+            "text": "Un IP și un port",
+            "correct": true
+          },
+          {
+            "text": "Un volum de stocare",
+            "correct": false
+          },
+          {
+            "text": "Un cont de utilizator",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum putem verifica serviciile existente într-un cluster Kubernetes?",
+        "answers": [
+          {
+            "text": "Folosind comanda 'kubectl get services'",
+            "correct": true
+          },
+          {
+            "text": "Folosind comanda 'kubectl describe pods'",
+            "correct": false
+          },
+          {
+            "text": "Folosind comanda 'kubectl list deployments'",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce tip de IP este asociat serviciilor Kubernetes de tip ClusterIP?",
+        "answers": [
+          {
+            "text": "Un IP static disponibil doar în cadrul clusterului",
+            "correct": true
+          },
+          {
+            "text": "Un IP public accesibil din internet",
+            "correct": false
+          },
+          {
+            "text": "Un IP dinamic care se schimbă la fiecare restart",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum poate un pod să se conecteze la un serviciu Kubernetes?",
+        "answers": [
+          {
+            "text": "Prin Cluster IP sau prin numele serviciului",
+            "correct": true
+          },
+          {
+            "text": "Doar prin Cluster IP",
+            "correct": false
+          },
+          {
+            "text": "Doar printr-un volum montat",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "De ce este util să folosim numele unui serviciu în loc de IP?",
+        "answers": [
+          {
+            "text": "Pentru a permite configurări statice și a evita schimbarea IP-urilor",
+            "correct": true
+          },
+          {
+            "text": "Pentru a crește securitatea serviciului",
+            "correct": false
+          },
+          {
+            "text": "Pentru a consuma mai puține resurse în Kubernetes",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce se întâmplă cu Cluster IP-ul unui serviciu după ștergerea și recrearea podurilor asociate?",
+        "answers": [
+          {
+            "text": "Cluster IP-ul rămâne același",
+            "correct": true
+          },
+          {
+            "text": "Cluster IP-ul se schimbă",
+            "correct": false
+          },
+          {
+            "text": "Serviciul este șters automat",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum putem testa conectivitatea către un serviciu Kubernetes dintr-un alt pod?",
+        "answers": [
+          {
+            "text": "Folosind comanda 'kubectl exec -it <pod> -- curl <Cluster IP>'",
+            "correct": true
+          },
+          {
+            "text": "Folosind comanda 'kubectl connect service <service-name>'",
+            "correct": false
+          },
+          {
+            "text": "Folosind comanda 'kubectl ping <service-name>'",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cine poate accesa un serviciu Kubernetes de tip ClusterIP?",
+        "answers": [
+          {
+            "text": "Doar podurile din cluster",
+            "correct": true
+          },
+          {
+            "text": "Oricine din internet",
+            "correct": false
+          },
+          {
+            "text": "Doar nodurile fizice ale clusterului",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce tip de serviciu Kubernetes permite conexiuni din exteriorul clusterului?",
+        "answers": [
+          {
+            "text": "NodePort",
+            "correct": true
+          },
+          {
+            "text": "ClusterIP",
+            "correct": false
+          },
+          {
+            "text": "PodPort",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum putem obține adresa IP a unui nod în Kubernetes?",
+        "answers": [
+          {
+            "text": "Folosind comanda 'kubectl get nodes -o wide'",
+            "correct": true
+          },
+          {
+            "text": "Folosind comanda 'kubectl describe services'",
+            "correct": false
+          },
+          {
+            "text": "Folosind comanda 'kubectl get pods -o json'",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Care este dezavantajul principal al folosirii NodePort pentru expunerea serviciilor?",
+        "answers": [
+          {
+            "text": "Trebuie să cunoaștem și să distribuim manual adresa IP a nodului",
+            "correct": true
+          },
+          {
+            "text": "Nu suportă conexiuni externe",
+            "correct": false
+          },
+          {
+            "text": "Poate fi utilizat doar în infrastructuri cloud",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce alternativă oferă infrastructurile cloud pentru expunerea serviciilor Kubernetes?",
+        "answers": [
+          {
+            "text": "Utilizarea unui load balancer",
+            "correct": true
+          },
+          {
+            "text": "Configurarea manuală a adreselor IP publice",
+            "correct": false
+          },
+          {
+            "text": "Alocarea unui port dinamic pentru fiecare serviciu",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "În ce situație este util să folosim NodePort?",
+        "answers": [
+          {
+            "text": "Când avem infrastructuri private sau nu avem acces la adrese IP publice",
+            "correct": true
+          },
+          {
+            "text": "Când vrem să facem serviciul accesibil global",
+            "correct": false
+          },
+          {
+            "text": "Când dorim să scalăm serviciul automat",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce tip de serviciu Kubernetes poate aloca un IP extern pentru a redirecționa conexiuni către un cluster?",
+        "answers": [
+          {
+            "text": "LoadBalancer",
+            "correct": true
+          },
+          {
+            "text": "ClusterIP",
+            "correct": false
+          },
+          {
+            "text": "NodePort",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce comandă putem folosi pentru a obține lista serviciilor din Kubernetes?",
+        "answers": [
+          {
+            "text": "kubectl get services",
+            "correct": true
+          },
+          {
+            "text": "kubectl get pods",
+            "correct": false
+          },
+          {
+            "text": "kubectl get ingress",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Care este diferența principală dintre un serviciu ClusterIP și un serviciu LoadBalancer?",
+        "answers": [
+          {
+            "text": "LoadBalancer alocă un ExternalIP vizibil din afara clusterului",
+            "correct": true
+          },
+          {
+            "text": "ClusterIP este mai rapid decât LoadBalancer",
+            "correct": false
+          },
+          {
+            "text": "LoadBalancer este utilizat doar pentru baze de date",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum verificăm conectivitatea la un serviciu Kubernetes LoadBalancer?",
+        "answers": [
+          {
+            "text": "Folosind comanda 'ping <service-ip>'",
+            "correct": true
+          },
+          {
+            "text": "Folosind comanda 'kubectl describe services'",
+            "correct": false
+          },
+          {
+            "text": "Folosind comanda 'kubectl exec -it <pod> -- curl localhost'",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce resursă Kubernetes poate gestiona automat alocarea unei adrese IP publice pentru mai multe servicii?",
+        "answers": [
+          {
+            "text": "Ingress Controller",
+            "correct": true
+          },
+          {
+            "text": "NodePort",
+            "correct": false
+          },
+          {
+            "text": "PersistentVolume",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum funcționează un Ingress Controller?",
+        "answers": [
+          {
+            "text": "Preia conexiuni externe și le redirecționează către serviciile din cluster",
+            "correct": true
+          },
+          {
+            "text": "Atribuie automat adrese IP fiecărui pod",
+            "correct": false
+          },
+          {
+            "text": "Monitorizează starea nodurilor din Kubernetes",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce serviciu de rețea este utilizat de Kubernetes pentru a gestiona conexiunile de tip Ingress?",
+        "answers": [
+          {
+            "text": "nginx",
+            "correct": true
+          },
+          {
+            "text": "Apache",
+            "correct": false
+          },
+          {
+            "text": "Traefik",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce rol are obiectul Ingress în Kubernetes?",
+        "answers": [
+          {
+            "text": "Definirea unei rute de acces la un serviciu",
+            "correct": true
+          },
+          {
+            "text": "Crearea automată a unor poduri noi",
+            "correct": false
+          },
+          {
+            "text": "Asigurarea redundanței pentru baze de date",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce comandă aplică un fișier de configurare Ingress în Kubernetes?",
+        "answers": [
+          {
+            "text": "kubectl apply -f <file>.yaml",
+            "correct": true
+          },
+          {
+            "text": "kubectl create ingress <file>.yaml",
+            "correct": false
+          },
+          {
+            "text": "kubectl expose ingress <file>.yaml",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce componentă poate gestiona certificările SSL automat în Kubernetes?",
+        "answers": [
+          {
+            "text": "cert-manager",
+            "correct": true
+          },
+          {
+            "text": "LoadBalancer",
+            "correct": false
+          },
+          {
+            "text": "ServiceMesh",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum putem verifica obiectele Ingress dintr-un cluster Kubernetes?",
+        "answers": [
+          {
+            "text": "kubectl get ingress",
+            "correct": true
+          },
+          {
+            "text": "kubectl get loadbalancers",
+            "correct": false
+          },
+          {
+            "text": "kubectl get networking",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce serviciu Kubernetes permite utilizarea unei singure adrese IP publice pentru multiple servicii HTTP?",
+        "answers": [
+          {
+            "text": "Ingress Controller",
+            "correct": true
+          },
+          {
+            "text": "LoadBalancer",
+            "correct": false
+          },
+          {
+            "text": "ClusterIP",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum putem face scalarea manuală a unui deployment în Kubernetes?",
+        "answers": [
+          {
+            "text": "Folosind comanda kubectl scale deployment <nume> --replicas <număr replici>",
+            "correct": true
+          },
+          {
+            "text": "Folosind comanda kubectl scale cluster <nume> --replicas <număr replici>",
+            "correct": false
+          },
+          {
+            "text": "Folosind fișierele YAML pentru a modifica manual numărul de replici",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce cuvânt cheie se folosește într-un manifest pentru a seta numărul de replici ale unui deployment?",
+        "answers": [
+          {
+            "text": "replicas",
+            "correct": true
+          },
+          {
+            "text": "instances",
+            "correct": false
+          },
+          {
+            "text": "count",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum poate scalarea statică a serviciilor să ajute un deployment?",
+        "answers": [
+          {
+            "text": "Permite mărirea capacității unui serviciu și garantează disponibilitatea aplicației",
+            "correct": true
+          },
+          {
+            "text": "Permite alocarea automată de resurse doar atunci când este necesar",
+            "correct": false
+          },
+          {
+            "text": "Permite instalarea automată a unei noi aplicații atunci când cererea crește",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce permite scalarea automată a deploymenturilor într-un sistem cloud?",
+        "answers": [
+          {
+            "text": "Reducerea costurilor prin ajustarea numărului de resurse alocate în funcție de cerințele aplicației",
+            "correct": true
+          },
+          {
+            "text": "Stabilirea unui număr fix de poduri pentru a îmbunătăți performanța",
+            "correct": false
+          },
+          {
+            "text": "Creșterea costurilor prin alocarea constantă a unui număr mare de poduri",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce tip de resurse poate solicita un pod într-un deployment?",
+        "answers": [
+          {
+            "text": "Resurse CPU și memorie",
+            "correct": true
+          },
+          {
+            "text": "Resurse GPU și stocare pe disc",
+            "correct": false
+          },
+          {
+            "text": "Resurse pentru backup și rețea",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum impune kubelet limitele de resurse pentru un pod?",
+        "answers": [
+          {
+            "text": "Folosind cgroups",
+            "correct": true
+          },
+          {
+            "text": "Folosind Kubernetes API",
+            "correct": false
+          },
+          {
+            "text": "Folosind docker-compose",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Care comandă Kubernetes poate fi folosită pentru a vizualiza resursele utilizate de poduri?",
+        "answers": [
+          {
+            "text": "kubectl top pods",
+            "correct": true
+          },
+          {
+            "text": "kubectl describe pods",
+            "correct": false
+          },
+          {
+            "text": "kubectl get resources",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce obiect Kubernetes este folosit pentru a scala automat numărul de poduri într-un deployment?",
+        "answers": [
+          {
+            "text": "HorizontalPodAutoscaler (HPA)",
+            "correct": true
+          },
+          {
+            "text": "PodAutoscaler",
+            "correct": false
+          },
+          {
+            "text": "PodController",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Care este scopul unui obiect HorizontalPodAutoscaler?",
+        "answers": [
+          {
+            "text": "Monitorizează resursele și ajustează automat numărul de poduri într-un deployment",
+            "correct": true
+          },
+          {
+            "text": "Crește numărul de replici pentru a preveni erorile de conexiune",
+            "correct": false
+          },
+          {
+            "text": "Se asigură că toate podurile sunt distribuite uniform pe noduri",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum se determină scalarea numărului de poduri folosind HPA?",
+        "answers": [
+          {
+            "text": "Pe baza mediei utilizării CPU-ului pe toate podurile din deployment",
+            "correct": true
+          },
+          {
+            "text": "Pe baza mediei utilizării memoriei pe toate podurile din deployment",
+            "correct": false
+          },
+          {
+            "text": "Pe baza numărului de erori înregistrate de poduri",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Cum se calculează numărul de replici în HPA?",
+        "answers": [
+          {
+            "text": "Folosing formula: ceil(currentReplicas * (currentCPUValue/desiredCPUValue))",
+            "correct": true
+          },
+          {
+            "text": "Folosind formula: ceil(currentReplicas * (desiredCPUValue/currentCPUValue))",
+            "correct": false
+          },
+          {
+            "text": "Folosind formula: currentReplicas * 2",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce obiect permite setarea valorii minime și maxime de replici într-un HPA?",
+        "answers": [
+          {
+            "text": "minReplicas și maxReplicas",
+            "correct": true
+          },
+          {
+            "text": "replicaMin și replicaMax",
+            "correct": false
+          },
+          {
+            "text": "minPods și maxPods",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce unitate de măsură este utilizată pentru a monitoriza CPU-ul în HPA?",
+        "answers": [
+          {
+            "text": "Utilizarea CPU-ului (CPU Utilization)",
+            "correct": true
+          },
+          {
+            "text": "Utilizarea memoriei",
+            "correct": false
+          },
+          {
+            "text": "Numărul de conexiuni rețea",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce resursă este configurată în secțiunea 'resources' a unui deployment pentru a limita utilizarea unui CPU?",
+        "answers": [
+          {
+            "text": "cpu",
+            "correct": true
+          },
+          {
+            "text": "memory",
+            "correct": false
+          },
+          {
+            "text": "disk",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "Ce comandă este utilizată pentru a crea un cluster Kubernetes local utilizând Kind?",
+        "answers": [
+          { "text": "kind create cluster", "correct": true },
+          { "text": "kubectl create cluster", "correct": false },
+          { "text": "docker create cluster", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce rol are o liveness probe într-un container Kubernetes?",
+        "answers": [
+          { "text": "Verifică dacă aplicația rulează și o restartează dacă eșuează", "correct": true },
+          { "text": "Verifică dacă aplicația este pregătită să primească trafic", "correct": false },
+          { "text": "Scalează automat numărul de poduri în funcție de încărcare", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce se întâmplă dacă o liveness probe eșuează de mai multe ori consecutiv?",
+        "answers": [
+          { "text": "Containerul este restartat automat", "correct": true },
+          { "text": "Containerul este șters definitiv", "correct": false },
+          { "text": "Nu se întâmplă nimic", "correct": false }
+        ]
+      },
+      {
+        "question": "Care dintre următoarele opțiuni este o metodă validă pentru readiness probe?",
+        "answers": [
+          { "text": "httpGet", "correct": true },
+          { "text": "pingProbe", "correct": false },
+          { "text": "tcpPing", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce parametru din readiness probe definește numărul de verificări reușite înainte ca un container să fie considerat gata?",
+        "answers": [
+          { "text": "successThreshold", "correct": true },
+          { "text": "failureThreshold", "correct": false },
+          { "text": "periodSeconds", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce resursă Kubernetes gestionează numărul de replici ale unui pod?",
+        "answers": [
+          { "text": "ReplicaSet", "correct": true },
+          { "text": "Pod", "correct": false },
+          { "text": "Service", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum expunem o aplicație rulată într-un pod Kubernetes pentru acces extern?",
+        "answers": [
+          { "text": "Prin crearea unui Service", "correct": true },
+          { "text": "Prin modificarea pod-ului", "correct": false },
+          { "text": "Prin utilizarea unei ConfigMap", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce tip de Service folosește un port accesibil în afara clusterului?",
+        "answers": [
+          { "text": "NodePort", "correct": true },
+          { "text": "ClusterIP", "correct": false },
+          { "text": "LoadBalancer", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce comandă listă toate podurile din Kubernetes?",
+        "answers": [
+          { "text": "kubectl get pods", "correct": true },
+          { "text": "kubectl list pods", "correct": false },
+          { "text": "kubectl describe pods", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum putem încărca o imagine Docker într-un cluster Kind?",
+        "answers": [
+          { "text": "kind load docker-image <image-name>", "correct": true },
+          { "text": "kubectl load docker-image <image-name>", "correct": false },
+          { "text": "docker push <image-name>", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce obiect Kubernetes acționează ca un API gateway?",
+        "answers": [
+          { "text": "Ingress", "correct": true },
+          { "text": "Service", "correct": false },
+          { "text": "Deployment", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce tip de Service permite doar acces intern în cluster?",
+        "answers": [
+          { "text": "ClusterIP", "correct": true },
+          { "text": "NodePort", "correct": false },
+          { "text": "LoadBalancer", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce comandă permite aplicarea unui fișier de configurare Kubernetes?",
+        "answers": [
+          { "text": "kubectl apply -f <file>", "correct": true },
+          { "text": "kubectl create -f <file>", "correct": false },
+          { "text": "kubectl add -f <file>", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce metodă este utilizată pentru a defini resursele CPU ale unui container?",
+        "answers": [
+          { "text": "requests și limits", "correct": true },
+          { "text": "minCPU și maxCPU", "correct": false },
+          { "text": "cpuUsage", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum se scalează manual un deployment Kubernetes?",
+        "answers": [
+          { "text": "kubectl scale deployment <deployment-name> --replicas=<num>", "correct": true },
+          { "text": "kubectl autoscale deployment <deployment-name>", "correct": false },
+          { "text": "kubectl update deployment <deployment-name> --scale=<num>", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce obiect Kubernetes este utilizat pentru a scala automat un deployment?",
+        "answers": [
+          { "text": "HorizontalPodAutoscaler", "correct": true },
+          { "text": "ReplicaSet", "correct": false },
+          { "text": "StatefulSet", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce parametru din autoscaler specifică numărul minim de replici?",
+        "answers": [
+          { "text": "minReplicas", "correct": true },
+          { "text": "maxReplicas", "correct": false },
+          { "text": "targetReplicas", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este scopul unui Deployment în Kubernetes?",
+        "answers": [
+          { "text": "Gestionarea și scalarea automată a podurilor", "correct": true },
+          { "text": "Definirea regulilor de rețea pentru poduri", "correct": false },
+          { "text": "Persistența datelor între reporniri", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum putem verifica evenimentele generate de un pod?",
+        "answers": [
+          { "text": "kubectl get events --for pod/<pod-name>", "correct": true },
+          { "text": "kubectl describe pod <pod-name>", "correct": false },
+          { "text": "kubectl log pod <pod-name>", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce componentă Kubernetes monitorizează și gestionează starea clusterului?",
+        "answers": [
+          { "text": "kube-controller-manager", "correct": true },
+          { "text": "kubectl", "correct": false },
+          { "text": "kube-proxy", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce comanda afișează toate resursele dintr-un namespace Kubernetes?",
+        "answers": [
+          { "text": "kubectl get all", "correct": true },
+          { "text": "kubectl get pods --all-namespaces", "correct": false },
+          { "text": "kubectl list resources", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce tip de volum Kubernetes permite stocarea persistentă a datelor?",
+        "answers": [
+          { "text": "PersistentVolume", "correct": true },
+          { "text": "ConfigMap", "correct": false },
+          { "text": "Secret", "correct": false }
+        ]
+      },
+      {
+        "question": "Care dintre următoarele opțiuni permite utilizarea variabilelor de mediu într-un container Kubernetes?",
+        "answers": [
+          { "text": "ConfigMap", "correct": true },
+          { "text": "Ingress", "correct": false },
+          { "text": "ReplicaSet", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce comandă elimină un deployment Kubernetes?",
+        "answers": [
+          { "text": "kubectl delete deployment <deployment-name>", "correct": true },
+          { "text": "kubectl remove deployment <deployment-name>", "correct": false },
+          { "text": "kubectl destroy deployment <deployment-name>", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce rol are kube-proxy în Kubernetes?",
+        "answers": [
+          { "text": "Gestionează rețelele și rutarea traficului către poduri", "correct": true },
+          { "text": "Monitorizează utilizarea resurselor în cluster", "correct": false },
+          { "text": "Automatizează crearea de noi noduri", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum verificăm consumul de resurse al unui pod?",
+        "answers": [
+          { "text": "kubectl top pod <pod-name>", "correct": true },
+          { "text": "kubectl describe pod <pod-name>", "correct": false },
+          { "text": "kubectl logs pod <pod-name>", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce obiect Kubernetes gestionează autentificarea și permisiunile utilizatorilor?",
+        "answers": [
+          { "text": "Role & RoleBinding", "correct": true },
+          { "text": "ServiceAccount", "correct": false },
+          { "text": "PersistentVolumeClaim", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce comandă este utilizată pentru a vedea log-urile unui pod?",
+        "answers": [
+          { "text": "kubectl logs <pod-name>", "correct": true },
+          { "text": "kubectl describe logs <pod-name>", "correct": false },
+          { "text": "kubectl get logs <pod-name>", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este un StatefulSet în Kubernetes?",
+        "answers": [
+          { "text": "Un obiect care gestionează aplicații cu state persistent", "correct": true },
+          { "text": "Un mecanism de autoscalare a podurilor", "correct": false },
+          { "text": "Un obiect care rulează containere fără stare", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce resursă Kubernetes este utilizată pentru a stoca date sensibile, cum ar fi parole?",
+        "answers": [
+          { "text": "Secret", "correct": true },
+          { "text": "ConfigMap", "correct": false },
+          { "text": "PersistentVolume", "correct": false }
+        ]
+      }
+    ];
+
+    const CC05 = [
       {
         "question": "Ce este Kubernetes?",
         "answers": [
@@ -828,14 +2111,518 @@
       }
     ]
 
+    const CC07 = [
+      {
+        "question": "Ce înseamnă acronimul CI/CD?",
+        "answers": [
+          { "text": "Continuous Integration/Continuous Delivery", "correct": true },
+          { "text": "Cloud Infrastructure/Container Deployment", "correct": false },
+          { "text": "Central Integration/Central Distribution", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este scopul principal al unui workflow CI/CD?",
+        "answers": [
+          { "text": "Automatizarea livrării codului, de la testare până la deployment", "correct": true },
+          { "text": "Scrierea codului sursă automat", "correct": false },
+          { "text": "Crearea documentației pentru aplicație", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce declanșează de obicei rularea unui pipeline CI/CD?",
+        "answers": [
+          { "text": "Un commit sau un pull request", "correct": true },
+          { "text": "Un mesaj de la utilizator", "correct": false },
+          { "text": "O eroare în aplicație", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce poate reprezenta output-ul unui pipeline CI/CD?",
+        "answers": [
+          { "text": "Un artefact sau un nou deployment", "correct": true },
+          { "text": "Un nou cod sursă", "correct": false },
+          { "text": "Un test manual", "correct": false }
+        ]
+      },
+      {
+        "question": "Unde sunt definite acțiunile unui pipeline CI/CD?",
+        "answers": [
+          { "text": "Într-un fișier de configurare", "correct": true },
+          { "text": "În codul aplicației", "correct": false },
+          { "text": "În baza de date", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este un runner în contextul CI/CD?",
+        "answers": [
+          { "text": "Un VM sau container care rulează comenzile pipeline-ului", "correct": true },
+          { "text": "Un utilizator care testează manual codul", "correct": false },
+          { "text": "Un tip special de commit", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este legătura dintre CI/CD și release-uri?",
+        "answers": [
+          { "text": "CI/CD este mecanismul prin care codul ajunge în producție", "correct": true },
+          { "text": "CI/CD înlocuiește complet procesul de release", "correct": false },
+          { "text": "CI/CD generează documentația pentru release", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este mediul de *development*?",
+        "answers": [
+          { "text": "Mediul unde se dezvoltă și se testează preliminar codul", "correct": true },
+          { "text": "Mediul unde se fac testele finale înainte de release", "correct": false },
+          { "text": "Mediul unde rulează aplicația finală", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce caracterizează mediul de *staging*?",
+        "answers": [
+          { "text": "Simulează cât mai bine mediul de producție", "correct": true },
+          { "text": "Este utilizat doar pentru backup-uri", "correct": false },
+          { "text": "Este folosit pentru designul UI", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este mediul de *production*?",
+        "answers": [
+          { "text": "Mediul unde aplicația este livrată utilizatorilor reali", "correct": true },
+          { "text": "Mediul folosit pentru testarea internă", "correct": false },
+          { "text": "Un server temporar pentru debugging", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce înseamnă reproductibilitatea într-un proces CI/CD?",
+        "answers": [
+          { "text": "Pași clari și replicabili pentru fiecare mediu și versiune", "correct": true },
+          { "text": "Cod care funcționează doar pe mașina dezvoltatorului", "correct": false },
+          { "text": "Testare manuală în fiecare etapă", "correct": false }
+        ]
+      },
+      {
+        "question": "De ce este important ca release-urile să aibă downtime minim?",
+        "answers": [
+          { "text": "Pentru ca aplicația să rămână disponibilă în timpul deploymentului", "correct": true },
+          { "text": "Pentru a permite modificarea serverelor", "correct": false },
+          { "text": "Pentru a închide aplicația temporar", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este avantajul release-urilor automate?",
+        "answers": [
+          { "text": "Reducerea erorilor umane", "correct": true },
+          { "text": "Crearea codului sursă automat", "correct": false },
+          { "text": "Eliminarea completă a testelor", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este un rollback în CI/CD?",
+        "answers": [
+          { "text": "Revenirea la o versiune anterioară stabilă", "correct": true },
+          { "text": "Eliminarea tuturor versiunilor aplicației", "correct": false },
+          { "text": "Ștergerea codului sursă vechi", "correct": false }
+        ]
+      },
+      {
+        "question": "Care dintre următoarele este un tool popular de CI/CD?",
+        "answers": [
+          { "text": "GitHub Actions", "correct": true },
+          { "text": "Postman", "correct": false },
+          { "text": "Figma", "correct": false }
+        ]
+      }, {
+        "question": "Ce presupune etapa de 'source code checkout' într-un pipeline CI/CD?",
+        "answers": [
+          { "text": "Preluarea codului sursă din repository și copierea în VM/container", "correct": true },
+          { "text": "Testarea codului prin unit tests", "correct": false },
+          { "text": "Compilarea codului în binar", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este scopul etapei de compilare într-un pipeline CI/CD?",
+        "answers": [
+          { "text": "Obținerea binarului și detectarea erorilor de compilare", "correct": true },
+          { "text": "Scrierea codului în repository", "correct": false },
+          { "text": "Executarea testelor unitare", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce se întâmplă în etapa de testare automată a unui pipeline CI/CD?",
+        "answers": [
+          { "text": "Se execută teste automate pentru a identifica buguri de logică sau funcționalitate", "correct": true },
+          { "text": "Se publică imaginea de Docker", "correct": false },
+          { "text": "Se compilează codul sursă", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce reprezintă publicarea artefactelor într-un pipeline CI/CD?",
+        "answers": [
+          { "text": "Publicarea aplicației sub formă de Docker image, executabil sau bibliotecă", "correct": true },
+          { "text": "Testarea codului cu utilizatori reali", "correct": false },
+          { "text": "Scrierea fișierului de configurare", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce presupune etapa de deployment în producție într-un pipeline CI/CD?",
+        "answers": [
+          { "text": "Livrarea aplicației către utilizatori finali, dacă este necesar", "correct": true },
+          { "text": "Scrierea codului în repository", "correct": false },
+          { "text": "Crearea unui branch nou în Git", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum poate fi folosit CI/CD pentru verificarea stilului de cod?",
+        "answers": [
+          { "text": "Prin rularea de lintere sau checkere, precum checkpatch.pl", "correct": true },
+          { "text": "Prin publicarea imaginilor Docker", "correct": false },
+          { "text": "Prin rularea testelor manuale", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce rol are CI/CD în rularea scripturilor de configurare?",
+        "answers": [
+          { "text": "Automatizează pași precum migrarea bazelor de date", "correct": true },
+          { "text": "Ajută la scrierea de documentație tehnică", "correct": false },
+          { "text": "Optimizează interfața aplicației", "correct": false }
+        ]
+      },
+      {
+        "question": "Care dintre următoarele este un use case comun pentru CI/CD?",
+        "answers": [
+          { "text": "Compilarea codului și build-uirea imaginilor Docker", "correct": true },
+          { "text": "Crearea de conturi pentru utilizatori", "correct": false },
+          { "text": "Monitorizarea traficului rețelei", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este un workflow în contextul GitHub Actions?",
+        "answers": [
+          { "text": "Un set de acțiuni care se execută la un anumit eveniment", "correct": true },
+          { "text": "Un fișier de configurare pentru setările IDE-ului", "correct": false },
+          { "text": "Un container Docker folosit pentru testare", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este un job în cadrul unui workflow GitHub Actions?",
+        "answers": [
+          { "text": "Un set de pași executat pe un anumit runner", "correct": true },
+          { "text": "Un test de performanță automat", "correct": false },
+          { "text": "Un tip de fișier de configurare", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce definește un step într-un job GitHub Actions?",
+        "answers": [
+          { "text": "O acțiune individuală, cum ar fi checkout sau run", "correct": true },
+          { "text": "O variabilă globală", "correct": false },
+          { "text": "O versiune de cod", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce eveniment declanșează workflow-ul în exemplul dat?",
+        "answers": [
+          { "text": "Un push pe branch-ul main", "correct": true },
+          { "text": "Un merge în orice branch", "correct": false },
+          { "text": "Un comentariu într-un pull request", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce face comanda `actions/checkout@v4` în pipeline?",
+        "answers": [
+          { "text": "Clonează codul sursă din repository", "correct": true },
+          { "text": "Instalează toate dependințele Go", "correct": false },
+          { "text": "Rulează testele definite în cod", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este avantajul principal al GitHub Actions ca soluție CI/CD?",
+        "answers": [
+          { "text": "Este complet integrat cu ecosistemul GitHub și nu necesită setarea infrastructurii", "correct": true },
+          { "text": "Permite testarea manuală direct din browser", "correct": false },
+          { "text": "Oferă suport complet pentru orice sistem de operare", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este unul dintre dezavantajele majore ale GitHub Actions?",
+        "answers": [
+          { "text": "Debugging-ul este dificil pe pipeline-uri complexe", "correct": true },
+          { "text": "Nu poate compila cod scris în Go", "correct": false },
+          { "text": "Necesită licență plătită pentru rulare", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce face comanda `go mod download` în pipeline?",
+        "answers": [
+          { "text": "Instalează toate dependințele specificate în fișierul go.mod", "correct": true },
+          { "text": "Rulează testele aplicației", "correct": false },
+          { "text": "Construiește imaginea Docker a aplicației", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce rol are GitHub Marketplace în contextul GitHub Actions?",
+        "answers": [
+          { "text": "Permite reutilizarea de acțiuni gata făcute", "correct": true },
+          { "text": "Stochează imaginile Docker construite", "correct": false },
+          { "text": "Administrează utilizatorii care rulează workflow-ul", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este GHCR în contextul GitHub Actions?",
+        "answers": [
+          { "text": "Un registry pentru stocarea și distribuirea imaginilor Docker", "correct": true },
+          { "text": "Un fișier de configurare pentru runners", "correct": false },
+          { "text": "O extensie pentru rularea aplicației în browser", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce comandă creează un cluster Kubernetes local folosind kind?",
+        "answers": [
+          { "text": "kind create cluster", "correct": true },
+          { "text": "kubectl create cluster", "correct": false },
+          { "text": "kind init", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce comandă instalează Argo CD într-un namespace dedicat?",
+        "answers": [
+          { "text": "kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml", "correct": true },
+          { "text": "kubectl install argocd", "correct": false },
+          { "text": "kubectl setup argo", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce resurse sunt afișate prin comanda `kubectl get all -n argocd`?",
+        "answers": [
+          { "text": "Toate resursele din namespace-ul argocd", "correct": true },
+          { "text": "Doar pod-urile Argo CD", "correct": false },
+          { "text": "Resursele din toate namespace-urile", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce definește un manifest Argo CD de tip `Application`?",
+        "answers": [
+          { "text": "Configurarea aplicației ce va fi sincronizată și rulată de Argo", "correct": true },
+          { "text": "O bază de date în Kubernetes", "correct": false },
+          { "text": "Un container pentru rularea testelor", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce comandă creează un namespace în Kubernetes pentru Argo CD?",
+        "answers": [
+          { "text": "kubectl create namespace argocd", "correct": true },
+          { "text": "argo create namespace argocd", "correct": false },
+          { "text": "kubectl apply argocd-ns.yaml", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce scop are comanda `kubectl port-forward svc/argocd-server -n argocd 8080:443`?",
+        "answers": [
+          { "text": "Deschide acces local către dashboard-ul Argo CD", "correct": true },
+          { "text": "Expune serviciul webserver în Internet", "correct": false },
+          { "text": "Crează o legătură între două namespace-uri", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum se obține parola de admin generată automat pentru Argo CD?",
+        "answers": [
+          { "text": "Prin extragere din secretul `argocd-initial-admin-secret`", "correct": true },
+          { "text": "Prin rularea comenzii `argocd get password`", "correct": false },
+          { "text": "Este setată implicit ca 'admin123'", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce comandă listează aplicațiile gestionate de Argo CD?",
+        "answers": [
+          { "text": "argocd app list", "correct": true },
+          { "text": "argocd list apps", "correct": false },
+          { "text": "argocd apps show", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce comandă afișează resursele asociate unei aplicații Argo CD?",
+        "answers": [
+          { "text": "argocd app resources go-simple-webserver", "correct": true },
+          { "text": "kubectl get app go-simple-webserver", "correct": false },
+          { "text": "argo list resources", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum se creează o aplicație în Argo CD folosind CLI?",
+        "answers": [
+          { "text": "argocd app create go-simple-webserver ...", "correct": true },
+          { "text": "argo app init go-simple-webserver ...", "correct": false },
+          { "text": "kubectl create app go-simple-webserver", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce imagine Docker este folosită în exemplul de manifest Deployment?",
+        "answers": [
+          { "text": "ghcr.io/andreia-oca/go-simple-webserver:latest", "correct": true },
+          { "text": "docker.io/go/simple-webserver:latest", "correct": false },
+          { "text": "hub.docker.com/andreia/webserver", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce rol are `syncPolicy` în manifestul aplicației Argo CD?",
+        "answers": [
+          { "text": "Controlează sincronizarea automată și comportamentul de self-heal", "correct": true },
+          { "text": "Setează numărul de replici pentru aplicație", "correct": false },
+          { "text": "Configurează dashboard-ul Argo", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce face opțiunea `prune: true` în cadrul `syncPolicy`?",
+        "answers": [
+          { "text": "Elimină resursele care nu mai sunt definite în manifests", "correct": true },
+          { "text": "Șterge istoricul sincronizărilor", "correct": false },
+          { "text": "Resetează aplicația la ultima versiune validă", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce face comanda `argocd app sync go-simple-webserver`?",
+        "answers": [
+          { "text": "Forțează sincronizarea aplicației cu manifestele din Git", "correct": true },
+          { "text": "Deschide dashboard-ul Argo în browser", "correct": false },
+          { "text": "Repornește aplicația în Kubernetes", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce beneficiu oferă dashboard-ul Argo CD?",
+        "answers": [
+          { "text": "Monitorizarea aplicațiilor și starea podurilor gestionate de Argo", "correct": true },
+          { "text": "Editarea fișierelor manifest direct în cluster", "correct": false },
+          { "text": "Crearea de utilizatori pentru Kubernetes", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce reprezintă strategia Canary/Rollout în contextul deploymentului?",
+        "answers": [
+          { "text": "Un deployment care se face în etape, începând cu un număr mic de utilizatori", "correct": true },
+          { "text": "Un deployment care rulează doar pe medii de test", "correct": false },
+          { "text": "Un deployment realizat doar în afara orelor de vârf", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este principalul avantaj al utilizării strategiei Canary/Rollout?",
+        "answers": [
+          { "text": "Permite monitorizarea stabilității aplicației fără a afecta toți utilizatorii", "correct": true },
+          { "text": "Reduce costurile de infrastructură", "correct": false },
+          { "text": "Grăbește procesul de deployment", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce se întâmplă în cazul unui bug într-un deployment de tip Canary?",
+        "answers": [
+          { "text": "Doar o mică parte dintre utilizatori sunt afectați", "correct": true },
+          { "text": "Toți utilizatorii pierd accesul la aplicație", "correct": false },
+          { "text": "Deploymentul se oprește automat", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum funcționează strategia Blue/Green deployment în Kubernetes?",
+        "answers": [
+          { "text": "Se creează un deployment nou (green), se verifică sănătatea acestuia și apoi se mută traficul de la versiunea veche (blue)", "correct": true },
+          { "text": "Se șterge versiunea veche și se lansează cea nouă", "correct": false },
+          { "text": "Se rulează ambele versiuni în paralel pentru totdeauna", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce presupune pasul de „promovare a deploymentului” într-un Blue/Green deployment?",
+        "answers": [
+          { "text": "Redirecționarea traficului de la blue la green", "correct": true },
+          { "text": "Testarea codului sursă în mediu local", "correct": false },
+          { "text": "Revenirea la versiunea anterioară", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum este evitat downtime-ul în strategia Blue/Green deployment?",
+        "answers": [
+          { "text": "Prin mutarea traficului doar după ce noua versiune e verificată", "correct": true },
+          { "text": "Prin oprirea tuturor serviciilor și repornirea lor", "correct": false },
+          { "text": "Prin rularea aplicației pe un singur server", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este un rollback în contextul deploymentului?",
+        "answers": [
+          { "text": "Procesul de revenire la o versiune anterioară stabilă", "correct": true },
+          { "text": "Crearea unui nou branch de dezvoltare", "correct": false },
+          { "text": "Testarea aplicației pe serverul de backup", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum poate fi realizat un rollback într-un Blue/Green deployment?",
+        "answers": [
+          { "text": "Schimbând traficul înapoi la deploymentul vechi (blue)", "correct": true },
+          { "text": "Recompilând codul aplicației", "correct": false },
+          { "text": "Creând o nouă aplicație cu un alt nume", "correct": false }
+        ]
+      },
+      {
+        "question": "De ce este important să avem un mecanism de rollback în pipeline-urile de deployment?",
+        "answers": [
+          { "text": "Pentru a reduce downtime-ul și a menține stabilitatea aplicației", "correct": true },
+          { "text": "Pentru a îmbunătăți viteza de build", "correct": false },
+          { "text": "Pentru a înlocui procesul de testare manuală", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce reprezintă 'setWeight' într-un rollout deployment?",
+        "answers": [
+          { "text": "Procentul de trafic redirecționat către noile poduri", "correct": true },
+          { "text": "Numărul de poduri create inițial", "correct": false },
+          { "text": "Timpul de așteptare între etapele de rollout", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este rolul 'pause' într-un rollout deployment?",
+        "answers": [
+          { "text": "Definește durata de așteptare înainte de a trece la următorul procentaj de trafic", "correct": true },
+          { "text": "Oprește definitiv procesul de deployment", "correct": false },
+          { "text": "Resetează configurația deploymentului", "correct": false }
+        ]
+      },
+      {
+        "question": "Când este considerat complet un rollout deployment?",
+        "answers": [
+          { "text": "Când 100% din trafic este redirecționat către noua versiune a aplicației", "correct": true },
+          { "text": "Când toate podurile sunt în stare Running", "correct": false },
+          { "text": "Când a fost creat primul pod", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce comandă se folosește pentru a monitoriza un rollout deployment în timp real?",
+        "answers": [
+          { "text": "argo-rollouts get rollout go-simple-webserver --watch", "correct": true },
+          { "text": "kubectl describe deployment go-simple-webserver", "correct": false },
+          { "text": "kubectl rollout history", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce comandă se folosește pentru a promova manual un rollout?",
+        "answers": [
+          { "text": "argo-rollouts promote go-simple-webserver", "correct": true },
+          { "text": "kubectl apply --force", "correct": false },
+          { "text": "argo sync --manual", "correct": false }
+        ]
+      }
+    ]
+
     let quizzes = [];
     let correctAnswersCount = 0; // Track the number of correct answers
 
     async function loadQuiz() {
       const select = document.getElementById('courseSelect').value;
 
-      if (select === 'CC-04.json') {
+      if (select === 'CC-04') {
         quizzes = CC04;
+      }
+      if (select === 'CC-05') {
+        quizzes = CC05;
+      }
+      if (select === 'CC-07') {
+        quizzes = CC07;
       }
 
       // Check if random order for questions is selected
