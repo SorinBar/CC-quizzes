@@ -109,6 +109,7 @@
         <option value="CC-05">Cloud Computing 05</option>
         <option value="CC-07">Cloud Computing 07</option>
         <option value="CC-08">Cloud Computing 08</option>
+        <option value="CC-09">Cloud Computing 09</option>
       </select>
       <div>
         <input type="checkbox" id="randomToggle" checked />
@@ -2973,6 +2974,425 @@
       }
     ];
 
+    const CC09 = [
+      {
+        "question": "Care este rolul principal al volumelor în Kubernetes?",
+        "answers": [
+          { "text": "Împărțirea fișierelor între containere din același pod", "correct": true },
+          { "text": "Stocarea persistentă a datelor pe termen lung", "correct": false },
+          { "text": "Limitarea resurselor alocate containerelor", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce se întâmplă cu datele dintr-un volum obișnuit după ștergerea podului în Kubernetes?",
+        "answers": [
+          { "text": "Datele sunt șterse împreună cu podul", "correct": true },
+          { "text": "Datele sunt salvate automat într-un PersistentVolume", "correct": false },
+          { "text": "Datele sunt transferate altui pod automat", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce caracterizează un volum obișnuit în Kubernetes (non-persistent)?",
+        "answers": [
+          { "text": "Este folosit pentru a partaja fișiere între containere din același pod", "correct": true },
+          { "text": "Este legat direct de un disk fizic permanent", "correct": false },
+          { "text": "Persistă automat datele în cloud", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce definește folosirea aceluiași volum de către mai multe containere într-un pod?",
+        "answers": [
+          { "text": "Toate containerele folosesc același nume de volum și montează la căi diferite", "correct": true },
+          { "text": "Fiecare container are nevoie de un volum diferit", "correct": false },
+          { "text": "Volumul trebuie duplicat pentru fiecare container", "correct": false }
+        ]
+      },
+      {
+        "question": "De ce este considerat ineficient setup-ul cu două containere pentru clonare și servire?",
+        "answers": [
+          { "text": "Există metode mai bune de a pregăti mediul pentru container", "correct": true },
+          { "text": "Git nu funcționează bine în containere", "correct": false },
+          { "text": "nginx nu poate servi fișiere HTML", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este scopul folosirii volumelor în exemplul cu nginx și git?",
+        "answers": [
+          { "text": "Partajarea fișierelor între containere pentru a servi un site web", "correct": true },
+          { "text": "Salvarea permanentă a codului clonat", "correct": false },
+          { "text": "Instalarea nginx în ambele containere", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce limitare are un Ingress în Kubernetes în ceea ce privește namespace-urile?",
+        "answers": [
+          { "text": "Poate face load balancing doar în interiorul unui namespace", "correct": true },
+          { "text": "Poate accesa orice serviciu din orice namespace", "correct": false },
+          { "text": "Este folosit pentru configurarea rețelei între noduri", "correct": false }
+        ]
+      },
+      {
+        "question": "De ce nu mai este suficient să configurăm serviciile în containere prin bind mount, ca în Docker?",
+        "answers": [
+          { "text": "Pentru că podurile nu sunt legate de un anumit nod și pot fi mutate în cluster", "correct": true },
+          { "text": "Pentru că bind mount nu mai este suportat de Kubernetes", "correct": false },
+          { "text": "Pentru că configurarea prin bind mount este prea rapidă", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este un ConfigMap și la ce se folosește în Kubernetes?",
+        "answers": [
+          { "text": "Un obiect care stochează perechi cheie-valoare folosite pentru configurarea podurilor", "correct": true },
+          { "text": "Un fișier de configurare al nodurilor din cluster", "correct": false },
+          { "text": "Un serviciu care monitorizează podurile", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum ajută un ConfigMap la separarea configurației de codul aplicației?",
+        "answers": [
+          { "text": "Configurarea este ținută separat și poate fi modificată fără a reconstrui imaginea", "correct": true },
+          { "text": "ConfigMap include automat codul aplicației", "correct": false },
+          { "text": "ConfigMap rulează comenzi externe pentru configurare", "correct": false }
+        ]
+      },
+      {
+        "question": "Care sunt cele două moduri principale de a folosi un ConfigMap într-un container?",
+        "answers": [
+          { "text": "Ca variabile de mediu sau ca fișiere montate prin volume", "correct": true },
+          { "text": "Ca port forward și log forwarding", "correct": false },
+          { "text": "Ca hook-uri de pre-start și post-stop", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum putem seta variabile de mediu în container folosind un ConfigMap?",
+        "answers": [
+          { "text": "Folosind `env` și `valueFrom.configMapKeyRef` în YAML", "correct": true },
+          { "text": "Adăugând fișierul ConfigMap direct în container", "correct": false },
+          { "text": "Folosing comanda `kubectl set env` fără referințe", "correct": false }
+        ]
+      },
+      {
+        "question": "De ce este recomandat să folosim ConfigMap în loc să scriem direct variabilele de mediu în deployment?",
+        "answers": [
+          { "text": "Pentru că putem modifica valorile fără a edita fișierul deployment", "correct": true },
+          { "text": "Pentru că Kubernetes nu suportă variabile de mediu directe", "correct": false },
+          { "text": "Pentru că este singura metodă suportată de Helm", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce trebuie făcut după modificarea unui ConfigMap pentru ca podul să folosească noile valori?",
+        "answers": [
+          { "text": "Trebuie restartat podul", "correct": true },
+          { "text": "Trebuie șters ConfigMap-ul", "correct": false },
+          { "text": "Trebuie reinițiat kubelet", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce comandă folosim pentru a inspecta valorile stocate într-un ConfigMap?",
+        "answers": [
+          { "text": "kubectl describe configmap <nume>", "correct": true },
+          { "text": "kubectl get values <nume>", "correct": false },
+          { "text": "kubectl logs configmap <nume>", "correct": false }
+        ]
+      },
+      {
+        "question": "De ce variabilele de mediu nu sunt suficiente pentru configurații complexe?",
+        "answers": [
+          { "text": "Pentru că nu putem defini structuri mari sau fișiere întregi", "correct": true },
+          { "text": "Pentru că nu pot fi exportate în YAML", "correct": false },
+          { "text": "Pentru că variabilele de mediu sunt criptate", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum putem încărca un fișier de configurare într-un ConfigMap?",
+        "answers": [
+          { "text": "Folosind comanda `kubectl create configmap --from-file=<fișier>`", "correct": true },
+          { "text": "Folosind comanda `kubectl apply -f <fișier>` direct", "correct": false },
+          { "text": "Scriind fișierul în container cu curl", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum montăm un fișier dintr-un ConfigMap ca volum într-un container?",
+        "answers": [
+          { "text": "Declarăm un volum de tip configMap și îl montăm cu volumeMounts", "correct": true },
+          { "text": "Îl adăugăm în init container", "correct": false },
+          { "text": "Îl montăm prin docker cp", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce rol are `volumeMounts` într-un container Kubernetes?",
+        "answers": [
+          { "text": "Montează un volum la o cale specifică din container", "correct": true },
+          { "text": "Descarcă fișiere din cloud în container", "correct": false },
+          { "text": "Configurează resursele CPU și memorie", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce se întâmplă dacă serviciile specificate în fișierul de configurare al HAproxy nu există?",
+        "answers": [
+          { "text": "HAproxy nu va porni", "correct": true },
+          { "text": "HAproxy va ignora serviciile lipsă", "correct": false },
+          { "text": "HAproxy va crea serviciile automat", "correct": false }
+        ]
+      },
+      {
+        "question": "De ce este importantă decuplarea configurației de container în medii distribuite?",
+        "answers": [
+          { "text": "Pentru că podurile pot rula pe noduri diferite și trebuie configurate dinamic", "correct": true },
+          { "text": "Pentru că nodurile distribuie fișierele automat", "correct": false },
+          { "text": "Pentru că este necesar pentru update-ul Kubernetes", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este principala problemă de securitate atunci când folosim ConfigMap pentru stocarea credențialelor?",
+        "answers": [
+          { "text": "Oricine are acces la namespace poate vedea datele", "correct": true },
+          { "text": "ConfigMap criptează greșit informațiile", "correct": false },
+          { "text": "ConfigMap nu poate fi folosit cu volume", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce avantaj oferă obiectele de tip Secret față de ConfigMap în Kubernetes?",
+        "answers": [
+          { "text": "Secretele pot fi obfuscate și criptate, oferind auditare specială", "correct": true },
+          { "text": "Secretele pot fi montate doar în namespace-ul default", "correct": false },
+          { "text": "Secretele rulează în propriul pod separat", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este dezavantajul principal al criptării secretelor în Kubernetes?",
+        "answers": [
+          { "text": "Necesită o cheie de decriptare introdusă manual de utilizator", "correct": true },
+          { "text": "Secretele criptate nu pot fi folosite în Pod-uri", "correct": false },
+          { "text": "Criptarea este incompatibilă cu etcd", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce rol are tipul asociat unui Secret în Kubernetes?",
+        "answers": [
+          { "text": "Obligă configurarea anumitor câmpuri și permite interoperabilitate cu alte obiecte", "correct": true },
+          { "text": "Îl face incompatibil cu ConfigMap", "correct": false },
+          { "text": "Împiedică montarea secretului ca volum", "correct": false }
+        ]
+      },
+      {
+        "question": "În ce format sunt stocate valorile dintr-un Secret în Kubernetes?",
+        "answers": [
+          { "text": "Base64", "correct": true },
+          { "text": "YAML pur", "correct": false },
+          { "text": "JSON criptat", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum expunem valorile dintr-un Secret într-un Pod?",
+        "answers": [
+          { "text": "Folosim `secretKeyRef`, similar cu `configMapKeyRef`", "correct": true },
+          { "text": "Folosim `valueRef` și `secretMount`", "correct": false },
+          { "text": "Folosim `envFrom` dintr-un config.yaml", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este un volum persistent în Kubernetes?",
+        "answers": [
+          { "text": "Un spațiu de stocare asociat cu un pod, independent de ciclul de viață al acestuia", "correct": true },
+          { "text": "Un fișier temporar generat la rularea podului", "correct": false },
+          { "text": "Un volum atașat doar în timpul creării unui container", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce avantaj oferă volumele persistente în Kubernetes?",
+        "answers": [
+          { "text": "Datele rămân salvate chiar dacă podul este șters", "correct": true },
+          { "text": "Permite rularea aplicațiilor fără conexiune la rețea", "correct": false },
+          { "text": "Crește viteza de execuție a podurilor", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce tip de aplicații beneficiază de volume persistente?",
+        "answers": [
+          { "text": "Aplicațiile care trebuie să partajeze date între mai multe componente", "correct": true },
+          { "text": "Aplicațiile complet stateless", "correct": false },
+          { "text": "Aplicațiile care rulează doar în containerul init", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce permite mutarea workloadurilor între noduri cu downtime minim?",
+        "answers": [
+          { "text": "Folosirea volumelor de stocare detașabile", "correct": true },
+          { "text": "Dezactivarea autoscaling-ului", "correct": false },
+          { "text": "Crearea de poduri fără volume", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este un StorageClass în Kubernetes?",
+        "answers": [
+          { "text": "Un obiect care definește cum este provisionat un volum", "correct": true },
+          { "text": "Un pod special pentru stocare", "correct": false },
+          { "text": "O unitate de măsură pentru spațiul disponibil", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce rol are storage class-ul default?",
+        "answers": [
+          { "text": "Este folosit dacă nu se specifică altul la alocarea volumului", "correct": true },
+          { "text": "Blochează utilizarea altor clase", "correct": false },
+          { "text": "Este utilizat doar pentru poduri stateless", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce driver folosește minikube pentru storage class-ul implicit?",
+        "answers": [
+          { "text": "hostpath", "correct": true },
+          { "text": "nfs", "correct": false },
+          { "text": "ceph", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este obiectul care reprezintă efectiv un spațiu pe un sistem de stocare?",
+        "answers": [
+          { "text": "PersistentVolume", "correct": true },
+          { "text": "StorageClass", "correct": false },
+          { "text": "Pod", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce specifică atributul `accessModes` dintr-un PV?",
+        "answers": [
+          { "text": "Modul în care poate fi accesat volumul (de exemplu, ReadWriteOnce)", "correct": true },
+          { "text": "Cine poate șterge volumul", "correct": false },
+          { "text": "Prioritatea alocării volumului", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce indică valoarea `ReadWriteOnce`?",
+        "answers": [
+          { "text": "Volumul poate fi accesat de un singur nod", "correct": true },
+          { "text": "Volumul poate fi accesat de mai multe noduri", "correct": false },
+          { "text": "Volumul este doar în citire", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este scopul câmpului `capacity` în PV?",
+        "answers": [
+          { "text": "Indică cât spațiu este disponibil pentru scheduling", "correct": true },
+          { "text": "Reprezintă limita strictă a spațiului pe disc", "correct": false },
+          { "text": "Definește numărul maxim de poduri ce pot folosi volumul", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este `claimRef` într-un manifest de PV?",
+        "answers": [
+          { "text": "Referința la PVC-ul care va folosi volumul", "correct": true },
+          { "text": "Referința la Podul care va monta volumul", "correct": false },
+          { "text": "ID-ul nodului care conține volumul", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este funcția atributului `hostPath` într-un PV?",
+        "answers": [
+          { "text": "Specifică locația de pe disc unde se află volumul", "correct": true },
+          { "text": "Definește modul de acces la volum", "correct": false },
+          { "text": "Indică endpoint-ul de rețea al volumului", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce stare are un volum PV imediat după creare?",
+        "answers": [
+          { "text": "Available", "correct": true },
+          { "text": "Pending", "correct": false },
+          { "text": "Bound", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum se numește obiectul care cere spațiu de la un PV?",
+        "answers": [
+          { "text": "PersistentVolumeClaim (PVC)", "correct": true },
+          { "text": "PodVolume", "correct": false },
+          { "text": "VolumeRequest", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce se întâmplă când un PVC este alocat unui PV?",
+        "answers": [
+          { "text": "Starea PV devine Bound", "correct": true },
+          { "text": "Starea PVC devine Terminated", "correct": false },
+          { "text": "Se creează automat un nou StorageClass", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce se întâmplă cu datele din PV dacă PVC-ul este șters?",
+        "answers": [
+          { "text": "Datele rămân salvate în volum", "correct": true },
+          { "text": "Datele sunt șterse automat", "correct": false },
+          { "text": "PV-ul este distrus imediat", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum se montează un PVC într-un pod?",
+        "answers": [
+          { "text": "Prin definirea lui în secțiunea `volumes` și `volumeMounts`", "correct": true },
+          { "text": "Doar prin includerea PVC-ului în metadata", "correct": false },
+          { "text": "Automat la crearea podului", "correct": false }
+        ]
+      },
+      {
+        "question": "Unde este specificat calea de montare a unui volum în container?",
+        "answers": [
+          { "text": "În câmpul `mountPath`", "correct": true },
+          { "text": "În câmpul `claimRef`", "correct": false },
+          { "text": "În metadata-ul podului", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce permite folosirea unui PVC într-un pod?",
+        "answers": [
+          { "text": "Partajarea volumului între mai multe containere", "correct": true },
+          { "text": "Crearea automată de deploymenturi", "correct": false },
+          { "text": "Evitarea folosirii unui manifest YAML", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce se întâmplă dacă storage class-ul permite provisioning automat?",
+        "answers": [
+          { "text": "Va fi creat automat un PV conform cerințelor PVC-ului", "correct": true },
+          { "text": "Va fi creat automat un nou nod", "correct": false },
+          { "text": "Va fi generat un nou deployment", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce definește câmpul `storageClassName` din PV sau PVC?",
+        "answers": [
+          { "text": "Tipul de provisioning folosit pentru volum", "correct": true },
+          { "text": "Spațiul maxim disponibil", "correct": false },
+          { "text": "Permisiunile utilizatorilor", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum poate fi verificată starea unui PV și PVC?",
+        "answers": [
+          { "text": "Cu comanda `kubectl get pv,pvc`", "correct": true },
+          { "text": "Cu comanda `kubectl describe volume`", "correct": false },
+          { "text": "Cu comanda `kubectl logs`", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce valoare are `RECLAIMPOLICY` în exemplul din minikube?",
+        "answers": [
+          { "text": "Delete", "correct": true },
+          { "text": "Retain", "correct": false },
+          { "text": "Recycle", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce mod de volum binding este folosit în storage class-urile demo?",
+        "answers": [
+          { "text": "Immediate", "correct": true },
+          { "text": "WaitForFirstConsumer", "correct": false },
+          { "text": "OnDemand", "correct": false }
+        ]
+      }
+    ]
+
     let quizzes = [];
     let correctAnswersCount = 0; // Track the number of correct answers
 
@@ -2990,6 +3410,10 @@
       }
       if (select === 'CC-08') {
         quizzes = CC08;
+      }
+
+      if (select === 'CC-09') {
+        quizzes = CC09;
       }
 
       // Check if random order for questions is selected
