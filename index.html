@@ -110,6 +110,7 @@
         <option value="CC-07">Cloud Computing 07</option>
         <option value="CC-08">Cloud Computing 08</option>
         <option value="CC-09">Cloud Computing 09</option>
+        <option value="CC-10">Cloud Computing 10</option>
       </select>
       <div>
         <input type="checkbox" id="randomToggle" checked />
@@ -3393,6 +3394,283 @@
       }
     ]
 
+    const CC10 = [
+      {
+        "question": "Ce este OpenShift în raport cu Kubernetes?",
+        "answers": [
+          { "text": "O distribuție de Kubernetes oferită de Red Hat", "correct": true },
+          { "text": "Un sistem de operare pentru containere", "correct": false },
+          { "text": "Un motor de căutare pentru clustere", "correct": false }
+        ]
+      },
+      {
+        "question": "Cine oferă suport pentru varianta Open Source a OpenShift?",
+        "answers": [
+          { "text": "Comunitatea", "correct": true },
+          { "text": "Microsoft", "correct": false },
+          { "text": "Google Cloud", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce funcționalitate oferă OpenShift pentru a ușura administrarea unui cluster Kubernetes?",
+        "answers": [
+          { "text": "Abstractizează complexități precum deploymentul în OpenStack sau integrarea cu OIDC", "correct": true },
+          { "text": "Elimină nevoia de noduri worker", "correct": false },
+          { "text": "Furnizează direct aplicații web pentru utilizatori", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce oferă OpenShift pentru a mări vizibilitatea asupra platformei?",
+        "answers": [
+          { "text": "Dashboarduri și automatizări", "correct": true },
+          { "text": "Backup automat pentru poduri", "correct": false },
+          { "text": "Acces root la toate containerele", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce sunt operatorii în Kubernetes?",
+        "answers": [
+          { "text": "Plugin-uri care adaugă obiecte și funcționalități noi în Kubernetes", "correct": true },
+          { "text": "Conturi de utilizatori cu roluri speciale", "correct": false },
+          { "text": "Sisteme externe de monitorizare", "correct": false }
+        ]
+      },
+      {
+        "question": "Un exemplu de funcționalitate oferită de un operator este:",
+        "answers": [
+          { "text": "Instalarea și folosirea de drivere pentru GPU-uri", "correct": true },
+          { "text": "Crearea de volume permanente prin comenzi bash", "correct": false },
+          { "text": "Dezactivarea autentificării pentru utilizatori", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce beneficiu oferă operatorii Kubernetes administratorilor?",
+        "answers": [
+          { "text": "Reduc complexitatea de administrare și deployment", "correct": true },
+          { "text": "Elimină complet nevoia de configurare YAML", "correct": false },
+          { "text": "Dezactivează securitatea rețelei", "correct": false }
+        ]
+      },
+      {
+        "question": "Operatorii pot oferi funcționalități accesibile pentru utilizatori în funcție de:",
+        "answers": [
+          { "text": "Permisiuni", "correct": true },
+          { "text": "Versiunea de Kubernetes", "correct": false },
+          { "text": "Tipul de container", "correct": false }
+        ]
+      },
+      {
+        "question": "OpenShift oferă suport suplimentar pentru clienții Red Hat sub forma:",
+        "answers": [
+          { "text": "Operatori exclusivi și plugin-uri", "correct": true },
+          { "text": "Reduceri la licențe Kubernetes", "correct": false },
+          { "text": "Acces gratuit la noduri nelimitate", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce exemplu de operator este relevant pentru dezvoltarea de aplicații?",
+        "answers": [
+          { "text": "Generarea de workspace-uri și IDE-uri automat", "correct": true },
+          { "text": "Crearea automată de poduri pentru baze de date", "correct": false },
+          { "text": "Reducerea dimensiunii imaginilor container", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce sunt Batch Jobs în Kubernetes?",
+        "answers": [
+          { "text": "O formă de a programa munca sub formă de joburi distincte", "correct": true },
+          { "text": "Servicii web care rulează continuu", "correct": false },
+          { "text": "Instrumente de rețea pentru comunicație între poduri", "correct": false }
+        ]
+      },
+      {
+        "question": "De ce nu este necesar un API pentru orice formă de procesare?",
+        "answers": [
+          { "text": "Pentru că unele sarcini pot fi executate ca joburi batch, nu continuu", "correct": true },
+          { "text": "Pentru că Kubernetes oferă API-uri implicite pentru orice", "correct": false },
+          { "text": "Pentru că joburile batch nu consumă resurse", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce lipsuri au batch joburile Kubernetes comparativ cu sistemele dedicate de batch queue?",
+        "answers": [
+          { "text": "Nu au limite implicite de timp și necesită implementări adiționale", "correct": true },
+          { "text": "Nu pot rula comenzi în containere", "correct": false },
+          { "text": "Nu pot fi lansate din YAML", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce instrument este recomandat pentru comportamente mai complexe cum ar fi înlănțuirea joburilor sau triggere?",
+        "answers": [
+          { "text": "Argo Workflows", "correct": true },
+          { "text": "Helm Charts", "correct": false },
+          { "text": "KubeProxy", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce trebuie specificat într-un job Kubernetes?",
+        "answers": [
+          { "text": "Podul în care rulează și comanda care va fi rulată", "correct": true },
+          { "text": "Numărul de noduri și politica de scalare", "correct": false },
+          { "text": "Strategia de autoscaling și tipul de serviciu", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce sunt Cron Jobs în Kubernetes?",
+        "answers": [
+          { "text": "Joburi programate care rulează repetitiv la intervale definite", "correct": true },
+          { "text": "Servicii expuse permanent în rețea", "correct": false },
+          { "text": "Controllere care gestionează deployment-uri", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce generează un Cron Job la momentul programat?",
+        "answers": [
+          { "text": "Obiecte de tip Job", "correct": true },
+          { "text": "Noi poduri de sistem", "correct": false },
+          { "text": "Alarme și notificări", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce format este folosit pentru a specifica programul de execuție al unui Cron Job?",
+        "answers": [
+          { "text": "Sintaxa cron-urilor UNIX", "correct": true },
+          { "text": "Format JSON cu timestampuri", "correct": false },
+          { "text": "Format ISO-8601", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este un exemplu de utilizare comună a Cron Jobs?",
+        "answers": [
+          { "text": "Backup al sistemelor pentru disaster recovery", "correct": true },
+          { "text": "Routing de trafic între servicii", "correct": false },
+          { "text": "Monitorizarea automată a containerelor", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce conține un jobTemplate într-un Cron Job?",
+        "answers": [
+          { "text": "Specificația unui job care va fi rulat conform programării", "correct": true },
+          { "text": "Un șablon pentru crearea de servicii", "correct": false },
+          { "text": "Configurația rețelei podurilor", "correct": false }
+        ]
+      },
+      {
+        "question": "De ce este important să folosim eficient GPU-urile în cadrul unui cluster?",
+        "answers": [
+          { "text": "Pentru a evita resurse neutilizate sau cicluri moarte", "correct": true },
+          { "text": "Pentru a crește temperatura GPU-ului", "correct": false },
+          { "text": "Pentru a consuma mai multă memorie RAM", "correct": false }
+        ]
+      },
+      {
+        "question": "De ce este utilă împărțirea unui GPU între mai multe workloaduri?",
+        "answers": [
+          { "text": "Pentru a maximiza utilizarea resurselor disponibile", "correct": true },
+          { "text": "Pentru a reduce viteza de execuție", "correct": false },
+          { "text": "Pentru a limita utilizarea procesorului", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este vendorul cel mai popular pentru GPU sharing în Kubernetes?",
+        "answers": [
+          { "text": "Nvidia", "correct": true },
+          { "text": "AMD", "correct": false },
+          { "text": "Intel", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce înseamnă MIG în contextul GPU sharing?",
+        "answers": [
+          { "text": "Multi Instance GPUs", "correct": true },
+          { "text": "Multiple Interconnected GPUs", "correct": false },
+          { "text": "Minimal Integrated Graphics", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce oferă MIG în materie de izolare între workloaduri?",
+        "answers": [
+          { "text": "Izolare completă", "correct": true },
+          { "text": "Acces partajat în regim colaborativ", "correct": false },
+          { "text": "Nicio izolare", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este un dezavantaj al utilizării MIG?",
+        "answers": [
+          { "text": "Necesită intervenția administratorului pentru configurare", "correct": true },
+          { "text": "Nu poate fi folosit în Kubernetes", "correct": false },
+          { "text": "Funcționează doar cu procesoare AMD", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce este MPS în contextul GPU sharing?",
+        "answers": [
+          { "text": "Multi-Process Service", "correct": true },
+          { "text": "Modul Paralel de Stocare", "correct": false },
+          { "text": "Middleware pentru Poduri Securizate", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este riscul major asociat cu MPS?",
+        "answers": [
+          { "text": "Vulnerabilități de securitate sau information leaks", "correct": true },
+          { "text": "Folosirea excesivă a energiei", "correct": false },
+          { "text": "Incompatibilitatea cu workloadurile containerizate", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum funcționează modelul de lucru în MPS?",
+        "answers": [
+          { "text": "Procesele rulează în paralel și împart resursele GPU", "correct": true },
+          { "text": "Procesele se exclud reciproc", "correct": false },
+          { "text": "Un singur job rulează pe GPU la un moment dat", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce reprezintă 'Time Slices' în contextul GPU sharing?",
+        "answers": [
+          { "text": "Felierea timpului de execuție pe GPU între procese", "correct": true },
+          { "text": "Divizarea memoriei RAM", "correct": false },
+          { "text": "Alocarea prioritară a traficului de rețea", "correct": false }
+        ]
+      },
+      {
+        "question": "Care este dezavantajul principal al folosirii Time Slices?",
+        "answers": [
+          { "text": "Overhead mare din cauza schimbărilor de context", "correct": true },
+          { "text": "Izolare completă între workloaduri", "correct": false },
+          { "text": "Lipsa compatibilității cu GPU-urile Nvidia", "correct": false }
+        ]
+      },
+      {
+        "question": "Cum pot fi prioritizate joburile în Kubernetes atunci când se folosesc Time Slices?",
+        "answers": [
+          { "text": "Prin specificarea unui nivel de prioritate care influențează durata slice-ului", "correct": true },
+          { "text": "Prin utilizarea de anotări pe poduri", "correct": false },
+          { "text": "Prin limitarea memoriei CPU", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce tip de workload ar trebui să primească un slice de timp mai mare?",
+        "answers": [
+          { "text": "Un workload grafic cu output vizibil pentru utilizator", "correct": true },
+          { "text": "Un proces de mentenanță rar folosit", "correct": false },
+          { "text": "Un job de backup în fundal", "correct": false }
+        ]
+      },
+      {
+        "question": "Ce avantaj aduce alocarea exclusivă a GPU-ului prin Time Slices?",
+        "answers": [
+          { "text": "Izolare între procese în timpul execuției", "correct": true },
+          { "text": "Execuție paralelă nelimitată", "correct": false },
+          { "text": "Partajare eficientă de memorie RAM", "correct": false }
+        ]
+      }
+    ];
+
+
+
     let quizzes = [];
     let correctAnswersCount = 0; // Track the number of correct answers
 
@@ -3414,6 +3692,10 @@
 
       if (select === 'CC-09') {
         quizzes = CC09;
+      }
+
+      if (select === 'CC-10') {
+        quizzes = CC10;
       }
 
       // Check if random order for questions is selected
